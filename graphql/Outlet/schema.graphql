@@ -1,0 +1,49 @@
+type Outlet {
+    outlet_id: ID!
+    outlet_name: String!
+    address: String!
+    phone_number: String
+    latitude: Float
+    longitude: Float
+    is_active: Boolean
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input OutletCreateInput {
+    outlet_name: String!
+    address: String!
+    phone_number: String!
+    latitude: Float
+    longitude: Float
+    is_active: Boolean = true
+}
+
+input OutletUpdateInput {
+    outlet_name: String
+    address: String
+    phone_number: String
+    latitude: Float
+    longitude: Float
+    is_active: Boolean
+}
+
+extend type Query {
+  outlets: [Outlet!]! @all(model: "App\\Models\\Outlet\\Outlet")
+  outlet(outlet_id: ID! @eq): Outlet @find(model: "App\\Models\\Outlet\\Outlet")
+  activeOutlets: [Outlet!]! @all(model: "App\\Models\\Outlet\\Outlet", scoops: ["active"])
+}
+
+extend type Mutation {
+  createOutlet(input: OutletCreateInput! @spread): Outlet
+    @create(model: "App\\Models\\Outlet\\Outlet")
+  
+  updateOutlet(
+    outlet_id: ID! @eq(key: "outlet_id"),
+    input: OutletUpdateInput! @spread
+  ): Outlet @update(model: "App\\Models\\Outlet\\Outlet")
+
+  deleteOutlet(outlet_id: ID! @eq(key: "outlet_id")): Outlet 
+    @delete(model: "App\\Models\\Outlet\\Outlet")
+
+}

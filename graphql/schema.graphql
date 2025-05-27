@@ -1,0 +1,26 @@
+# A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`.
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+# A time string with format `H:i:s`, e.g. `13:43:32`.
+scalar Time @scalar(class: "App\\graphql\\Scalars\\Time")
+
+
+#import ./Customer/schema.graphql
+#import ./Role/schema.graphql
+#import ./MembershipPackage/schema.graphql
+#import ./MemberTransaction/schema.graphql
+#import ./Notification/schema.graphql
+#import ./NotificationStatus/schema.graphql
+#import ./NotificationType/schema.graphql
+#import ./Outlet/schema.graphql
+#import ./VehicleType/schema.graphql
+#import ./Shift/schema.graphql
+#import ./Staff/schema.graphql
+#import ./PaymentStatus/schema.graphql
+#import ./PaymentMethod/schema.graphql
+#import ./ServiceType/schema.graphql
+#import ./Service/schema.graphql
+#import ./TransactionPayment/schema.graphql
+#import ./TransactionService/schema.graphql
+#import ./Transaction/schema.graphql
+#import ./Expense/schema.graphql

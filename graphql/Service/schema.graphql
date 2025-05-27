@@ -1,0 +1,52 @@
+type Service {
+    service_id: ID!
+    service_name: String!
+    service_type_id: ID!
+    price: Int
+    estimated_duration: Int
+    description: String
+    is_active: Boolean
+    outlet_id: ID!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input ServiceCreateInput {
+    service_name: String!
+    service_type_id: ID!
+    price: Int!
+    estimated_duration: Int!
+    description: String
+    is_active: Boolean = true
+    outlet_id: ID!
+}
+
+input ServiceUpdateInput {
+    service_name: String
+    service_type_id: ID
+    price: Int
+    estimated_duration: Int
+    description: String
+    is_active: Boolean
+    outlet_id: ID
+}
+
+extend type Query {
+  services: [Service!]! @all(model: "App\\Models\\Service\\Service")
+  service(service_id: ID! @eq): Service @find(model: "App\\Models\\Service\\Service")
+  activeServices: [Service!]! @all(model: "App\\Models\\Service\\Service", scoops: ["active"])
+}
+
+extend type Mutation {
+  createService(input: ServiceCreateInput! @spread): Service
+    @create(model: "App\\Models\\Service\\Service")
+  
+  updateService(
+    service_id: ID! @eq(key: "service_id"),
+    input: ServiceUpdateInput! @spread
+  ): Service @update(model: "App\\Models\\Service\\Service")
+
+  deleteService(service_id: ID! @eq(key: "service_id")): Service
+    @delete(model: "App\\Models\\Service\\Service")
+
+}

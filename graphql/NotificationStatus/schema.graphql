@@ -1,0 +1,39 @@
+
+type NotificationStatus {
+    status_id: ID!
+    status_name: String
+    code: String
+    description: String
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input NotificationStatusCreateInput {
+    status_name: String!
+    code: String!
+    description: String
+}
+
+input NotificationStatusUpdateInput {
+    status_name: String
+    code: String
+    description: String
+}
+
+extend type Query {
+  notificationStatuses: [NotificationStatus!]! @all(model: "App\\Models\\NotificationStatuses\\NotificationStatuses")
+  notificationStatus(status_id: ID! @eq): NotificationStatus @find(model: "App\\Models\\NotificationStatuses\\NotificationStatuses")
+}
+
+extend type Mutation {
+  createNotificationStatus(input: NotificationStatusCreateInput! @spread): NotificationStatus
+    @create(model: "App\\Models\\NotificationStatuses\\NotificationStatuses")
+  
+  updateNotificationStatus(
+    status_id: ID! @eq(key: "status_id"),
+    input: NotificationStatusUpdateInput! @spread
+  ): NotificationStatus @update(model: "App\\Models\\NotificationStatuses\\NotificationStatuses")
+
+  deleteNotificationStatus(status_id: ID! @eq(key: "status_id")): NotificationStatus
+    @delete(model: "App\\Models\\NotificationStatuses\\NotificationStatuses")
+}

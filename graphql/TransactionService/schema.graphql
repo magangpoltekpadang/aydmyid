@@ -1,0 +1,78 @@
+enum TransactionServiceStatus {
+  pending
+  in_progress
+  completed
+  cancelled
+}
+
+type TransactionService {
+  transaction_service_id: ID!
+  transaction_id: ID!
+  service_id: ID!
+  quantity: Int!
+  unit_price: Float!
+  discount: Float!
+  total_price: Float!
+  worker_id: ID!
+  start_time: DateTime!
+  end_time: DateTime!
+  status: TransactionServiceStatus!
+  notes: String
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+input TransactionServiceCreateInput {
+  transaction_id: ID!
+  service_id: ID!
+  quantity: Int!
+  unit_price: Float!
+  discount: Float!
+  total_price: Float!
+  worker_id: ID!
+  start_time: DateTime!
+  end_time: DateTime!
+  status: TransactionServiceStatus!
+  notes: String
+}
+
+input TransactionServiceUpdateInput {
+  transaction_id: ID!
+  service_id: ID!
+  quantity: Int!
+  unit_price: Float!
+  discount: Float!
+  total_price: Float!
+  worker_id: ID!
+  start_time: DateTime!
+  end_time: DateTime!
+  status: TransactionServiceStatus!
+  notes: String
+}
+
+extend type Query {
+  transactionServices: [TransactionService!]! @all(model: "App\\Models\\TransactionService\\TransactionService")
+  transactionService(transaction_service_id: ID! @eq): TransactionService @find(model: "App\\Models\\TransactionService\\TransactionService")
+  transactionTrxService(transaction_id: ID! @eq): [TransactionService!]! @all(model: "App\\Models\\TransactionService\\TransactionService")
+  serviceTrxService(service_id: ID! @eq): [TransactionService!]! @all(model: "App\\Models\\TransactionService\\TransactionService")
+  staffTrxService(staff_id: ID! @eq): [TransactionService!]! @all(model: "App\\Models\\TransactionService\\TransactionService")
+}
+
+extend type Mutation {
+  createTransactionService(input: TransactionServiceCreateInput! @spread): TransactionService
+    @create(model: "App\\Models\\TransactionService\\TransactionService")
+
+  updateTransactionService(
+    transaction_service_id: ID! @eq(key: "transaction_service_id"),
+    input: TransactionServiceUpdateInput! @spread
+  ): TransactionService
+    @update(model: "App\\Models\\TransactionService\\TransactionService")
+
+  deleteTransactionService(transaction_service_id: ID! @eq(key: "transaction_service_id")): TransactionService
+    @delete(model: "App\\Models\\TransactionService\\TransactionService")
+}
+
+type TransactionServicePaginator {
+  data: [TransactionService!]!
+  paginatorInfo: PaginatorInfo!
+}

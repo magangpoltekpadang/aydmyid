@@ -1,0 +1,44 @@
+
+type NotificationType {
+    notification_type_id: ID!
+    type_name: String
+    code: String
+    template_text: String
+    is_active: Boolean
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input NotificationTypeCreateInput {
+    type_name: String!
+    code: String!
+    template_text: String
+    is_active: Boolean = true
+}
+
+input NotificationTypeUpdateInput {
+    type_name: String
+    code: String
+    template_text: String
+    is_active: Boolean
+}
+
+extend type Query {
+  notificationTypes: [NotificationType!]! @all(model: "App\\Models\\NotificationType\\NotificationType")
+  notificationType(notification_type_id: ID! @eq): NotificationType @find(model: "App\\Models\\NotificationType\\NotificationType")
+  activeNotificationTypes: [NotificationType!]! @all(model: "App\\Models\\NotificationType\\NotificationType", scoops: ["active"])
+}
+
+extend type Mutation {
+  createNotificationType(input: NotificationTypeCreateInput! @spread): NotificationType
+    @create(model: "App\\Models\\NotificationType\\NotificationType")
+  
+  updateNotificationType(
+    notification_type_id: ID! @eq(key: "notification_type_id"),
+    input: NotificationTypeUpdateInput! @spread
+  ): NotificationType @update(model: "App\\Models\\NotificationType\\NotificationType")
+
+  deleteNotificationType(notification_type_id: ID! @eq(key: "notification_type_id")): NotificationType
+    @delete(model: "App\\Models\\NotificationType\\NotificationType")
+
+}

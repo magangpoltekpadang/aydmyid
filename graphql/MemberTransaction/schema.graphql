@@ -1,0 +1,60 @@
+
+type MemberTransaction {
+    member_transaction_id: ID!
+    customer_id: ID!
+    package_id: ID!
+    outlet_id: ID!
+    transaction_date: DateTime
+    expiry_date: DateTime
+    price: Float
+    payment_method_id: ID!
+    staff_id: ID!
+    receipt_number: String
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input MemberTransactionCreateInput {
+    customer_id: ID!
+    package_id: ID!
+    outlet_id: ID!
+    transaction_date: DateTime
+    expiry_date: DateTime
+    price: Float
+    payment_method_id: ID!
+    staff_id: ID!
+    receipt_number: String
+}
+
+input MemberTransactionUpdateInput {
+    customer_id: ID
+    package_id: ID
+    outlet_id: ID
+    transaction_date: DateTime
+    expiry_date: DateTime
+    price: Float
+    payment_method_id: ID
+    staff_id: ID
+    receipt_number: String
+}
+
+extend type Query {
+  memberTransactions: [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  memberTransaction(member_transaction_id: ID! @eq): MemberTransaction @find(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionPackage(package_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionOutlet(outlet_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionPaymenmethod(payment_method_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+}
+
+extend type Mutation {
+  createMemberTransaction(input: MemberTransactionCreateInput! @spread): MemberTransaction
+    @create(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  
+  updateMemberTransaction(
+    member_transaction_id: ID! @eq(key: "member_transaction_id"),
+    input: MemberTransactionUpdateInput! @spread
+  ): MemberTransaction @update(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+
+  deleteMemberTransaction(member_transaction_id: ID! @eq(key: "member_transaction_id")): MemberTransaction
+    @delete(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+}

@@ -1,0 +1,40 @@
+type PaymentStatus {
+    payment_status_id: ID!
+    status_name: String!
+    code: String
+    description: String
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input PaymentStatusCreateInput {
+    status_name: String!
+    code: String!
+    description: String
+}
+
+input PaymentStatusUpdateInput {
+    status_name: String
+    code: String
+    description: String
+}
+
+extend type Query {
+  paymentStatuses: [PaymentStatus!]! @all(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+
+  paymentStatus(payment_status_id: ID! @eq(key: "payment_status_id")): PaymentStatus
+  @find(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+}
+
+extend type Mutation {
+  createPaymentStatus(input: PaymentStatusCreateInput! @spread): PaymentStatus
+    @create(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+  
+  updatePaymentStatus(
+    payment_status_id: ID! @eq(key: "payment_status_id"),
+    input: PaymentStatusUpdateInput! @spread
+  ): PaymentStatus @update(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+
+  deletePaymentStatus(payment_status_id: ID! @eq(key: "payment_status_id")): PaymentStatus
+    @delete(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+}

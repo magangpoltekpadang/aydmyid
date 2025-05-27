@@ -1,0 +1,59 @@
+
+type Staff {
+    staff_id: ID!
+    name: String!
+    email: String!
+    phone_number: String!
+    password_hash: String!
+    outlet_id: ID!
+    role_id: ID!
+    is_active: Boolean
+    last_login: DateTime
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input StaffCreateInput {
+    name: String!
+    email: String!
+    phone_number: String!
+    password_hash: String!
+    outlet_id: ID!
+    role_id: ID!
+    is_active: Boolean = true
+    last_login: DateTime
+}
+
+input StaffUpdateInput {
+    name: String
+    email: String
+    phone_number: String
+    password_hash: String
+    outlet_id: ID
+    role_id: ID
+    is_active: Boolean
+    last_login: DateTime
+}
+
+extend type Query {
+  staffs: [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
+  staff(staff_id: ID! @eq): Staff @find(model: "App\\Models\\Staff\\Staff")
+  activeStaff: [Staff!]! @all(model: "App\\Models\\Staff\\Staff", scoops: ["active"])
+  outletStaff(outlet_id: ID! @eq): [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
+  roleStaff(role_id: ID! @eq): [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
+}
+
+extend type Mutation {
+  createStaff(input: StaffCreateInput! @spread): Staff
+    @create(model: "App\\Models\\Staff\\Staff")
+  
+  updateStaff(
+    staff_id: ID! @eq(key: "staff_id"),
+    input: StaffUpdateInput! @spread
+  ): Staff @update(model: "App\\Models\\Staff\\Staff")
+
+  deleteStaff(staff_id: ID! @eq(key: "staff_id")): Staff
+    @delete(model: "App\\Models\\Staff\\Staff")
+
+}
+

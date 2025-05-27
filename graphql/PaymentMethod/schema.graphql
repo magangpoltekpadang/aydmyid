@@ -1,0 +1,40 @@
+type PaymentMethod {
+    payment_method_id: ID!
+    method_name: String!
+    code: String
+    is_active: Boolean
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input PaymentMethodCreateInput {
+    method_name: String!
+    code: String!
+    is_active: Boolean = true
+}
+
+input PaymentMethodUpdateInput {
+    method_name: String
+    code: String
+    is_active: Boolean
+}
+
+extend type Query {
+  paymentMethods: [PaymentMethod!]! @all(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+  paymentMethod(payment_method_id: ID! @eq): PaymentMethod @find(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+  activePaymentMethods: [PaymentMethod!]! @all(model: "App\\Models\\PaymentMethod\\PaymentMethod", scoops: ["active"])
+}
+
+extend type Mutation {
+  createPaymentMethod(input: PaymentMethodCreateInput! @spread): PaymentMethod
+    @create(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+  
+  updatePaymentMethod(
+    payment_method_id: ID! @eq(key: "payment_method_id"),
+    input: PaymentMethodUpdateInput! @spread
+  ): PaymentMethod @update(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+
+  deletePaymentMethod(payment_method_id: ID! @eq(key: "payment_method_id")): PaymentMethod
+    @delete(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+
+}

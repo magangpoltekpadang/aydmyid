@@ -1,0 +1,49 @@
+
+type VehicleType {
+    vehicle_type_id: ID!
+    type_name: String!
+    code: String
+    description: String
+    is_active: Boolean
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input VehicleTypeCreateInput {
+    type_name: String!
+    code: String
+    description: String
+    is_active: Boolean = true
+}
+
+input VehicleTypeUpdateInput {
+    type_name: String!
+    code: String
+    description: String
+    is_active: Boolean
+}
+
+extend type Query {
+  vehicleTypes: [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType")
+  vehicleType(vehicle_type_id: ID! @eq): VehicleType @find(model: "App\\Models\\VehicleType\\VehicleType")
+  activeVehicleTypes: [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType", scoops: ["active"])
+}
+
+extend type Mutation {
+  createVehicleType(input: VehicleTypeCreateInput! @spread): VehicleType
+    @create(model: "App\\Models\\VehicleType\\VehicleType")
+  
+  updateVehicleType(
+    vehicle_type_id: ID! @eq(key: "vehicle_type_id"),
+    input: VehicleTypeUpdateInput! @spread
+  ): VehicleType @update(model: "App\\Models\\VehicleType\\VehicleType")
+
+  deleteVehicleType(vehicle_type_id: ID! @eq(key: "vehicle_type_id")): VehicleType
+    @delete(model: "App\\Models\\VehicleType\\VehicleType")
+  
+}
+
+type VehicleTypePaginator {
+  data: [VahicleType!]!
+  paginatorInfo: paginatorInfo!
+}

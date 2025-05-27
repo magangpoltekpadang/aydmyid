@@ -1,0 +1,38 @@
+type Role {
+  role_id: ID!
+  role_name: String!
+  code: String!
+  description: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+input RoleCreateInput {
+  role_name: String!
+  code: String!
+  description: String
+}
+
+input RoleUpdateInput {
+  role_name: String
+  code: String
+  description: String
+}
+
+extend type Query {
+  roles: [Role!]! @all(model: "App\\Models\\Role\\Role")
+  role(role_id: ID! @eq): Role @find(model: "App\\Models\\Role\\Role")
+}
+
+extend type Mutation {
+  createRole(input: RoleCreateInput! @spread): Role
+    @create(model: "App\\Models\\Role\\Role")
+  
+  updateRole(
+    role_id: ID! @eq(key: "role_id"),
+    input: RoleUpdateInput! @spread
+  ): Role @update(model: "App\\Models\\Role\\Role")
+
+  deleteRole(role_id: ID! @eq(key: "role_id")): Role 
+    @delete(model: "App\\Models\\Role\\Role")
+}

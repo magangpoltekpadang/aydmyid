@@ -1,0 +1,60 @@
+type Expense {
+  expense_id: ID!
+  expense_code: String!
+  outlet_id: ID!
+  expense_date: DateTime!
+  amount: Float!
+  category: String!
+  description: String
+  staff_id: ID!
+  shift_id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+input ExpenseCreateInput {
+  expense_code: String!
+  outlet_id: ID!
+  expense_date: DateTime!
+  amount: Float!
+  category: String!
+  description: String
+  staff_id: ID!
+  shift_id: ID!
+}
+
+input ExpenseUpdateInput {
+  expense_code: String
+  outlet_id: ID
+  expense_date: DateTime
+  amount: Float
+  category: String
+  description: String
+  staff_id: ID
+  shift_id: ID
+}
+
+extend type Query {
+  expenses: [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
+  expense(expense_id: ID! @eq): Expenses @find(model: "App\\Models\\Expense\\Expense")
+  outletExpenses(outlet_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
+}
+
+extend type Mutation {
+  createExpense(input: ExpenseCreateInput! @spread): Expense
+    @create(model: "App\\Models\\Expense\\Expense")
+
+  updateExpense(
+    expense_id: ID! @eq(key: "expense_id"),
+    input: ExpenseUpdateInput! @spread
+  ): Expense
+    @update(model: "App\\Models\\Expense\\Expense")
+
+  deleteExpense(expense_id: ID! @eq(key: "expense_id")): Expense
+    @delete(model: "App\\Models\\Expense\\Expense")
+}
+
+type ExpensePaginator {
+  data: [Expense!]!
+  paginatorInfo: PaginatorInfo!
+}
