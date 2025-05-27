@@ -5,7 +5,7 @@
     <!-- Header and Create Button -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="flex items-center justify-between">
-        <h3 class="text-2xl font-bold text-white">Vehicle Types</h3>
+        <h1 class="text-2xl font-bold text-gray-800">Vehicle Type</h1>
         <a href="/vehicle-type/create" 
             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             + Add Type
@@ -13,42 +13,43 @@
     </div>
 
     <!-- Cards -->
-    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Total Vehicles Card -->
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
                 <i class="fas fa-car text-xl"></i>
             </div>
             <div>
-                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Total Vehicles</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Total Vehicles</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
                     x-text="pagination.total">
                 </p>
             </div>
         </div>
-       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
                 <i class="fas fa-check-circle text-xl"></i>
             </div>
             <div>
-                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Active Types</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Active Types</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
                     x-text="vehicleTypes.filter(v => v.is_active).length">
                 </p>
             </div>
         </div>
-        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-            <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
+
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
                 <i class="fas fa-times-circle text-xl"></i>
             </div>
             <div>
-                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">Inactive Types</p>
-                <p class="text-lg font-semibold text-gray-700 dark:text-gray-200"
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Inactive Types</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
                     x-text="vehicleTypes.filter(v => !v.is_active).length">
                 </p>
             </div>
-        </div>
-            
+        </div>  
     </div>
     
     <!-- Search and Filter Section -->
@@ -63,7 +64,7 @@
             <!-- Status Filter -->
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select id="status" x-model="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <select id="status" x-model="status" class="mt-1 block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500">
                     <option value="">All</option>
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>
@@ -86,7 +87,7 @@
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
-                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-white dark:bg-gray-800">
+                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-blue-600 bg-blue-50 dark:text-white dark:bg-blue-600">
                       <th class="px-4 py-3">Type Name</th>
                       <th class="px-4 py-3">Code</th>
                       <th class="px-4 py-3">Description</th>
@@ -94,26 +95,24 @@
                       <th class="px-4 py-3">Action</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                <tbody class="bg-white divide-y dark:divide-white-700 dark:bg-white-800">
                     <template x-for="(vehicleType, index) in vehicleTypes" :key="vehicleType.vehicle_type_id">
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm" x-text="vehicleType.type_name"></div>
-                            </td>
-                            <td class="px-4 py-3 text-sm" x-text="vehicleType.code"></td>
-                            <td class="px-4 py-3 text-sm" x-text="vehicleType.description || '-'"></td>
+                        <tr class="text-black-500 dark:text-black-100">
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="vehicleType.code"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="vehicleType.code"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="vehicleType.description || '-'"></td>
                             <td class="px-4 py-3 text-xs">
-                                <span x-bind:class="vehicleType.is_active ? 'bg-green-700 text-green-100' : 'bg-red-700 text-red-100'"
+                                <span x-bind:class="vehicleType.is_active ? 'bg-green-600 text-green-100' : 'bg-red-600 text-red-100'"
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                                     x-text="vehicleType.is_active ? 'Active' : 'Inactive'">
                                 </span>
                             </td>
-                            <td class="px-4 py-3 text-sm">
+                            <td class="px-4 py-3 text-sm text-gray-500">
                                 <a :href="`/vehicle-type/${vehicleType.vehicle_type_id}/edit`"
                                     class="text-blue-600 hover:text-blue-900 mr-3">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <button @click="confirmDelete(vehicleType.vehicle_type_id)" class="text-red-600 hover:text-red-900">
+                                <button @click="confirmDelete(vehicleType.vehicle_type_id)" class="text-red-500 hover:text-red-500">
                                 <i class="fas fa-trash"></i>
                                 </button>
                             </td>

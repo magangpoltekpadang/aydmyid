@@ -16,45 +16,41 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
         <!-- Total Membership Package -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Total Membership Package</p>
-                    <p class="mt-1 text-3xl font-semibold text-gray-900" x-text="pagination.total"></p>
-                </div>
-                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
-                    <i class="fas fa-car text-xl"></i>
-                </div>
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+                <i class="fas fa-box text-xl"></i>
+            </div>
+            <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Total Packages</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
+                    x-text="pagination.total">
+                </p>
             </div>
         </div>
 
         <!-- Active Packages -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Active Packages</p>
-                    <p class="mt-1 text-3xl font-semibold text-gray-900"
-                       x-text="membershipPackages.filter(v => v.is_active).length">
-                    </p>
-                </div>
-                <div class="p-3 rounded-full bg-green-100 text-green-600">
-                    <i class="fas fa-check-circle text-xl"></i>
-                </div>
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+                <i class="fas fa-check-circle text-xl"></i>
+            </div>
+            <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Active Packages</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
+                    x-text="membershipPackages.filter(v => v.is_active).length">
+                </p>
             </div>
         </div>
 
         <!-- Inactive Packages -->
-        <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Inactive Packages</p>
-                    <p class="mt-1 text-3xl font-semibold text-gray-900"
+        <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-red-500 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-500">
+                <i class="fas fa-times-circle text-xl"></i>
+            </div>
+            <div>
+                <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Inactive Packages</p>
+                <p class="text-lg font-semibold text-gray-700 dark:text-gray-600"
                     x-text="membershipPackages.filter(v => !v.is_active).length">
-                    </p>
-                </div>
-                <div class="p-3 rounded-full bg-red-100 text-red-600">
-                    <i class="fas fa-times-circle text-xl"></i>
-                </div>
+                </p>
             </div>
         </div>
     </div>
@@ -90,30 +86,30 @@
     </div>
 
     <!-- Vehicle Types Table -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Package Name</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration Days</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Max Vehicles</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-blue-600 bg-blue-50 dark:text-white dark:bg-blue-600">
+                        <th class="px-4 py-3">Package Name</th>
+                        <th class="px-4 py-3">Duration Days</th>
+                        <th class="px-4 py-3">Price</th>
+                        <th class="px-4 py-3">Max Vehicles</th>
+                        <th class="px-4 py-3">Description</th>
+                        <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y dark:divide-white-700 dark:bg-white-800">
                     <template x-for="(membershipPackage, index) in membershipPackages" :key="membershipPackage.package_id">
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900" x-text="membershipPackage.package_name"></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="membershipPackage.duration_days"></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="membershipPackage.price"></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="membershipPackage.max_vehicles"></td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" x-text="membershipPackage.description || '-'"></td>
+                        <tr class="text-black-500 dark:text-black-100">
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="membershipPackage.package_name"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="membershipPackage.duration_days"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="membershipPackage.price"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="membershipPackage.max_vehicles"></td>
+                            <td class="px-4 py-3 text-sm text-gray-500" x-text="membershipPackage.description || '-'"></td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span x-bind:class="membershipPackage.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                                <span x-bind:class="membershipPackage.is_active ? 'bg-green-600 text-green-100' : 'bg-red-600 text-red-100'"
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                                     x-text="membershipPackage.is_active ? 'Active' : 'Inactive'">
                                 </span>
