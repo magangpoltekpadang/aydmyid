@@ -1,15 +1,15 @@
 @extends('layout.main')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
-    <h1 class="text-2xl font-bold mb-6">Edit Vehicle Type</h1>
+<div class="container mx-auto px-4 py-6 max-w-lg">
 
-    <form action="{{ route('VehicleType.update', $vehicleType->vehicle_type_id) }}" method="POST" class="space-y-4">
+    <form action="{{ route('vehicle-type.update',  $vehicleType->vehicle_type_id) }}" method="POST" class="bg-white shadow rounded px-8 py-6">
         @csrf
         @method('PUT')
-
+        
+        <h1 class="text-2xl font-bold mb-6">Edit Vehicle Type</h1>
         <div>
-            <label class="block text-gray-700">Type Name</label>
+            <label class="block text-gray-700 font-semibold mb-2">Type Name</label>
             <input type="text" name="type_name" value="{{ old('type_name', $vehicleType->type_name) }}"
                    class="w-full border px-4 py-2 rounded" required>
         </div>

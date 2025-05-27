@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({
                     query: query,
                     variables: variables
-                }),
+                })
             });
             return await response.json();
         } catch (error) {
@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Komponen data Alpine.js untuk jenis kendaraan
-    Alpine.data('vehicleTypeData', () => ({
-        vehicleTypes: [],
+    Alpine.data('membershipPackageData', () => ({
+        membershipPackages: [],
         pagination: {
             current_page: 1,
             per_page: 10,
@@ -35,25 +35,27 @@ document.addEventListener('DOMContentLoaded', function () {
         search: '',
         status: '',
         showDeleteModal: false,
-        vehicleTypeIdToDelete: null,
+        membershipPackageIdToDelete: null,
         loading: false,
         error: null,
 
         async init() {
-            await this.fetchVehicleTypes();
+            await this.fetchMembershipPackages();
         },
 
-        async fetchVehicleTypes() {
+        async fetchMembershipPackages() {
             this.loading = true;
             this.error = null;
 
             const query = `
-                query GetVehicleTypes($page: Int, $perPage: Int, $search: String, $is_active: Boolean) {
-                    vehicleTypes(page: $page, perPage: $perPage, search: $search, is_active: $is_active) {
+                query GetMembershipPackages($page: Int, $perPage: Int, $search: String, $is_active: Boolean) {
+                    membershipPackages(page: $page, perPage: $perPage, search: $search, is_active: $is_active) {
                         data {
-                            vehicle_type_id
-                            type_name
-                            code
+                            package_id
+                            package_name
+                            duration_days
+                            price
+                            max_vehicles
                             description
                             is_active
                             created_at
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 page: this.pagination.current_page,
                 perPage: this.pagination.per_page,
                 search: this.search,
-                is_active: this.status ? this.status === '1' : null,
+                is_active: this.status ? this.status === '1' : null
             };
 
             const result = await executeGraphQL(query, variables);
@@ -83,33 +85,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.error = result.errors[0].message;
                 console.error('GraphQL Errors:', result.errors);
             } else {
-                this.vehicleTypes = result.data.vehicleTypes.data;
+                this.membershipPackages = result.data.membershipPackages.data;
                 this.pagination = {
-                    current_page: result.data.vehicleTypes.paginatorInfo.currentPage,
-                    last_page: result.data.vehicleTypes.paginatorInfo.lastPage,
-                    per_page: result.data.vehicleTypes.paginatorInfo.perPage,
-                    total: result.data.vehicleTypes.paginatorInfo.total,
-                    has_more: result.data.vehicleTypes.paginatorInfo.hasMorePages
+                    current_page: result.data.membershipPackages.paginatorInfo.currentPage,
+                    last_page: result.data.membershipPackages.paginatorInfo.lastPage,
+                    per_page: result.data.membershipPackages.paginatorInfo.perPage,
+                    total: result.data.membershipPackages.paginatorInfo.total,
+                    has_more: result.data.membershipPackages.paginatorInfo.hasMorePages
                 };
             }
 
             this.loading = false;
         },
 
-        async deleteVehicleType() {
-            if (!this.vehicleTypeIdToDelete) return;
+        async deleteMembershipPackage() {
+            if (!this.membershipPackagesIdToDelete) return;
 
             const mutation = `
-                mutation DeleteVehicleType($id: ID!) {
-                    deleteVehicleType(vehicle_type_id: $id) {
-                        vehicle_type_id
-                        type_name
+                mutation DeleteMembershipPackage($id: ID!) {
+                    deleteMembershipPackage(package_id: $id) {
+                        package_id
+                        package_name
+                        duration_days
+                        price
+                        max_vehicles
+                        description
+                        is_active
                     }
                 }
             `;
 
             const variables = {
-                id: this.vehicleTypeIdToDelete
+                id: this.membershipPackageIdToDelete
             };
 
             const result = await executeGraphQL(mutation, variables);
@@ -119,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('GraphQL Errors:', result.errors);
             } else {
                 this.showDeleteModal = false;
-                await this.fetchVehicleTypes();
+                await this.fetchMembershipPackages();
             }
         },
 
@@ -127,20 +134,20 @@ document.addEventListener('DOMContentLoaded', function () {
         async changePage(page) {
             if (page === '...') return;
             this.pagination.current_page = parsInt(page);
-            await this.fetchVehicleTypes();
+            await this.fetchMembershipPackages();
         },
 
         async previousPage() {
             if (this.pagination.current_page > 1) {
                 this.pagination.current_page--;
-                await this.fetchVehicleTypes();
+                await this.fetchMembershipPackages();
             }  
         },
 
         async nextPage() {
             if (this.pagination.current_page < this.pagination.last_page) {
                 this.pagination.current_page++;
-                await this.fetchVehicleTypes();
+                await this.fetchMembershipPackages();
             }  
         },
 
@@ -148,11 +155,11 @@ document.addEventListener('DOMContentLoaded', function () {
             this.search = '';  
             this.status = '';  
             this.pagination.current_page = 1;
-            await this.fetchVehicleTypes();  
+            await this.fetchMembershipPackages();  
         },
 
         confirmDelete(id) {
-            this.vehicleTypeIdToDelete = id;
+            this.membershipPackageIdToDelete = id;
             this.showDeleteModal = true;
         }
 

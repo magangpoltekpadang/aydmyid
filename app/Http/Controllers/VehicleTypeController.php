@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Http;
 
 class VehicleTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $vehicleTypes = VehicleType::all();
-        return view('VehicleType.index', compact('vehicleTypes')); 
+        $query = VehicleType::query();
+        $vehicleTypes = $query->paginate(10)->withQueryString();
+
+        return view('VehicleType.index'); // view awal
     }
 
     public function create()
@@ -26,14 +28,14 @@ class VehicleTypeController extends Controller
             'type_name' => 'required|string|max:255',
             'code' => 'nullable|string|max:50',
             'description' => 'nullable|string',
-            'is_active' => 'boolean',
+            'is_active' => 'nullable|in:1,0',
         ]);
 
         // Simpan data ke DB
         VehicleType::create($validated);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('VehicleType.index')->with('success', 'Vehicle type berhasil ditambahkan.');
+        return redirect()->route('vehicle-type.index')->with('success', 'Vehicle type berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -53,13 +55,15 @@ class VehicleTypeController extends Controller
             'is_active' => $request->has('is_active'),
         ]);
 
-        return redirect()->route('VehicleType.index')->with('success', 'Vehicle Type updated successfully.');
+        return redirect()->route('vehicle-type.index')->with('success', 'Vehicle Type updated successfully.');
     }
+
 
     public function destroy($id)
     {
-        VehicleType::destroy($id);
-        return redirect()->route('VehicleType.index')->with('success', 'Vehicle Type deleted.');
+        $vehicleType = VehicleType::findOrFail($id);
+        $vehicleType->delete();
+        return response()->json(['message' => 'Deleted successfully']);
     }
 
 }

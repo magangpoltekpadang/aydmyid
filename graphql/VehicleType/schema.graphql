@@ -16,15 +16,25 @@ input VehicleTypeCreateInput {
     is_active: Boolean = true
 }
 
-input VehicleTypeUpdateInput {
-    type_name: String!
+input VehicleTypeInput {
+    type_name: String
     code: String
     description: String
     is_active: Boolean
 }
 
+input VehicleTypeFilter {
+  id: ID
+  code: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  vehicleTypes: [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType")
+  vehicleTypes(
+    search: String
+    is_active: Boolean
+  ): [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType")
   vehicleType(vehicle_type_id: ID! @eq): VehicleType @find(model: "App\\Models\\VehicleType\\VehicleType")
   activeVehicleTypes: [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType", scoops: ["active"])
 }

@@ -13,9 +13,9 @@
         </div>
     @endif
 
-    <form action="{{ route('vehicle-type.store') }}" method="POST" class="bg-white shadow rounded px-8 py-6">
+    <form action="{{ route('membership-package.store') }}" method="POST" class="bg-white shadow rounded px-8 py-6">
         @csrf
-         <h1 class="text-2xl font-bold mb-6">Add New Type</h1>
+         <h1 class="text-2xl font-bold mb-6">Add New Package</h1>
         <div class="mb-4">
             <label for="type_name" class="block text-gray-700 font-semibold mb-2">Type Name <span class="text-red-600">*</span></label>
             <input type="text" id="type_name" name="type_name" value="{{ old('type_name') }}" required

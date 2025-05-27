@@ -20,6 +20,12 @@ input MembershipPackageCreateInput {
     is_active: Boolean = true
 }
 
+input MembershipPackageFilter {
+  id: ID
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 input MembershipPackageUpdateInput {
     package_name: String
     duration_days: Int
@@ -30,7 +36,10 @@ input MembershipPackageUpdateInput {
 }
 
 extend type Query {
-  membershipPackages: [MembershipPackage!]! @all(model: "App\\Models\\MembershipPackage\\MembershipPackage")
+  membershipPackages(
+    search: String
+    is_active: Boolean
+  ): [MembershipPackage!]! @all(model: "App\\Models\\MembershipPackage\\MembershipPackage")
   membershipPackage(package_id: ID! @eq): MembershipPackage @find(model: "App\\Models\\MembershipPackage\\MembershipPackage")
   activeMembershipPackeges: [MembershipPackage!]! @all(model: "App\\Models\\MembershipPackage\\MembershipPackage", scoops: ["active"])
 }
@@ -47,5 +56,10 @@ extend type Mutation {
   deleteMembershipPackage(package_id: ID! @eq(key: "package_id")): MembershipPackage
     @delete(model: "App\\Models\\MembershipPackage\\MembershipPackage")
 
+}
+
+type MembershipPackagePaginator {
+  data: [MembershipPackage!]!
+  paginatorInfo: paginatorInfo!
 }
 
