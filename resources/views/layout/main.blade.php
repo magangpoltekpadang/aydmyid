@@ -23,11 +23,11 @@
             <a class="ml-6 text-base font-bold text-pink-1000">Sistem Pencucian Mobil</a>
             <ul class="mt-6">
                 <li class="relative px-6 py-3">
-                    @if(request()->is('dashboard'))
+                    @if(request()->is('/'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-blue-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('dashboard') ? 'text-blue-600 dark:text-blue-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('/') ? 'text-blue-600 dark:text-blue-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-grey-100 dark:hover:text-grey-200"
                         href="/">
                         <i class="fas fa-home" role="img" aria-label="Dashboard"></i>
