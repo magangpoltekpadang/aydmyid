@@ -29,7 +29,7 @@
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
                             {{ request()->is('dashboard') ? 'text-blue-600 dark:text-blue-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-grey-100 dark:hover:text-grey-200"
-                        href="/dashboard">
+                        href="/">
                         <i class="fas fa-home" role="img" aria-label="Dashboard"></i>
                         <span class="ml-4">Dashboard</span>
                     </a>
