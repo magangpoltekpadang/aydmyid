@@ -16,7 +16,7 @@ input OutletCreateInput {
     phone_number: String!
     latitude: Float
     longitude: Float
-    is_active: Boolean = true
+    is_active: Boolean 
 }
 
 input OutletUpdateInput {
@@ -28,8 +28,18 @@ input OutletUpdateInput {
     is_active: Boolean
 }
 
+input OutletFilter {
+  id: ID
+  outlet_name: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  outlets: [Outlet!]! @all(model: "App\\Models\\Outlet\\Outlet")
+  outlets(
+    search: String
+    is_active: Boolean
+  ): [Outlet!]! @all(model: "App\\Models\\Outlet\\Outlet")
   outlet(outlet_id: ID! @eq): Outlet @find(model: "App\\Models\\Outlet\\Outlet")
   activeOutlets: [Outlet!]! @all(model: "App\\Models\\Outlet\\Outlet", scoops: ["active"])
 }
@@ -46,4 +56,9 @@ extend type Mutation {
   deleteOutlet(outlet_id: ID! @eq(key: "outlet_id")): Outlet 
     @delete(model: "App\\Models\\Outlet\\Outlet")
 
+}
+
+type OutletPaginator {
+  data: [Outlet!]!
+  paginatorInfo: paginatorInfo!
 }

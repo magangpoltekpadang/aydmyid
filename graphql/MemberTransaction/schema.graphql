@@ -39,11 +39,16 @@ input MemberTransactionUpdateInput {
 }
 
 extend type Query {
-  memberTransactions: [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
-  memberTransaction(member_transaction_id: ID! @eq): MemberTransaction @find(model: "App\\Models\\MemberTransaction\\MemberTransaction")
-  membertransactionPackage(package_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
-  membertransactionOutlet(outlet_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
-  membertransactionPaymenmethod(payment_method_id: ID! @eq): [MemberTransaction!]! @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  memberTransactions: [MemberTransaction!]! 
+    @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  memberTransaction(member_transaction_id: ID! @eq): MemberTransaction 
+    @find(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionPackage(package_id: ID! @eq): [MemberTransaction!]! 
+    @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionOutlet(outlet_id: ID! @eq): [MemberTransaction!]! 
+    @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
+  membertransactionPaymenmethod(payment_method_id: ID! @eq): [MemberTransaction!]! 
+    @all(model: "App\\Models\\MemberTransaction\\MemberTransaction")
 }
 
 extend type Mutation {

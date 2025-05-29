@@ -37,8 +37,18 @@ input CustomerUpdateInput {
     is_member: Boolean
 }
 
+input CustomerFilter {
+  id: ID
+  plate_number: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  customers: [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
+  customers(
+    search: String
+    is_active: Boolean
+  ): [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
   customer(customer_id: ID! @eq): Customer @find(model: "App\\Models\\Customer\\Customer")
   activeCustomers: [Customer!]! @all(model: "App\\Models\\Customer\\Customer", scoops: ["active"])
   outletShift(outlet_id: ID! @eq): [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
@@ -55,5 +65,10 @@ extend type Mutation {
 
   deleteCustomer(customer_id: ID! @eq(key: "customer_id")): Customer 
     @delete(model: "App\\Models\\Customer\\Customer")
+}
+
+type CustomerPaginator {
+  data: [Customer!]!
+  paginatorInfo: paginatorInfo!
 }
 

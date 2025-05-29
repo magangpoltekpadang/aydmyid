@@ -16,10 +16,9 @@ class Outlet extends Model
     protected $fillable = [
         'outlet_name',
         'address',
-        'Phone_number',
+        'phone_number',
         'latitude',
         'longitude',
-        'join_date',
         'is_active'
     ];
 

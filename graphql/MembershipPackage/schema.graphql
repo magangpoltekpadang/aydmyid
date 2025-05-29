@@ -17,7 +17,7 @@ input MembershipPackageCreateInput {
     price: Float!
     max_vehicles: Int!
     description: String
-    is_active: Boolean = true
+    is_active: Boolean
 }
 
 input MembershipPackageFilter {
@@ -33,6 +33,13 @@ input MembershipPackageUpdateInput {
     max_vehicles: Int
     description: String
     is_active: Boolean
+}
+
+input MembershipPackageFilter {
+  id: ID
+  package_name: String
+  is_active: Boolean
+  search: String @where(operator: "like")
 }
 
 extend type Query {

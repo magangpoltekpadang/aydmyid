@@ -13,7 +13,7 @@ input NotificationTypeCreateInput {
     type_name: String!
     code: String!
     template_text: String
-    is_active: Boolean = true
+    is_active: Boolean
 }
 
 input NotificationTypeUpdateInput {
@@ -23,10 +23,23 @@ input NotificationTypeUpdateInput {
     is_active: Boolean
 }
 
+input NotificationTypeFilter {
+  id: ID
+  code: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  notificationTypes: [NotificationType!]! @all(model: "App\\Models\\NotificationType\\NotificationType")
-  notificationType(notification_type_id: ID! @eq): NotificationType @find(model: "App\\Models\\NotificationType\\NotificationType")
-  activeNotificationTypes: [NotificationType!]! @all(model: "App\\Models\\NotificationType\\NotificationType", scoops: ["active"])
+  notificationTypes(
+    search: String
+    is_active: Boolean
+  ): [NotificationType!]! 
+    @all(model: "App\\Models\\NotificationType\\NotificationType")
+  notificationType(notification_type_id: ID! @eq): NotificationType 
+    @find(model: "App\\Models\\NotificationType\\NotificationType")
+  activeNotificationTypes: [NotificationType!]! 
+    @all(model: "App\\Models\\NotificationType\\NotificationType", scoops: ["active"])
 }
 
 extend type Mutation {
@@ -41,4 +54,9 @@ extend type Mutation {
   deleteNotificationType(notification_type_id: ID! @eq(key: "notification_type_id")): NotificationType
     @delete(model: "App\\Models\\NotificationType\\NotificationType")
 
+}
+
+type NotificationTypePaginator {
+  data: [NotificationType!]!
+  paginatorInfo: paginatorInfo!
 }

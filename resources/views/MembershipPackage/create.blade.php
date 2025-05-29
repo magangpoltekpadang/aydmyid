@@ -1,57 +1,85 @@
-@extends('layout.main')
+<form action="{{ route('membership-package.store') }}" method="POST"
+    class="rounded-xl border border-gray-200 dark:bg-white-900 dark:border-white p-5 space-y-5 shadow-sm">
+    @csrf
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Package</h2>
 
-@section('content')
+    {{-- Package Name --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+            <i class="fas fa-box" aria-hidden="true"></i>
+        </span>
+        <input type="text" id="package_name" name="package_name" value="{{ old('package_name') }}" required
+            placeholder="Package Name"
+            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    </div>
 
-<div class="container mx-auto px-4 py-6 max-w-lg">
-    @if ($errors->any())
-        <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
-            <ul class="list-disc pl-5">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    {{-- Duration Day --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+        </span>
+        <input type="text" id="duration_days" name="duration_days" value="{{ old('duration_days') }}" required
+            placeholder="Duration Days"
+            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    </div>
 
-    <form action="{{ route('membership-package.store') }}" method="POST" class="bg-white shadow rounded px-8 py-6">
-        @csrf
-         <h1 class="text-2xl font-bold mb-6">Add New Package</h1>
-        <div class="mb-4">
-            <label for="type_name" class="block text-gray-700 font-semibold mb-2">Type Name <span class="text-red-600">*</span></label>
-            <input type="text" id="type_name" name="type_name" value="{{ old('type_name') }}" required
-                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        </div>
+    {{-- Price --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+        </span>
+        <input type="text" id="price" name="price" value="{{ old('price') }}" required
+            placeholder="Price"
+            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    </div>
 
-        <div class="mb-4">
-            <label for="code" class="block text-gray-700 font-semibold mb-2">Code</label>
-            <input type="text" id="code" name="code" value="{{ old('code') }}"
-                   class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-        </div>
+    {{-- Max Vehicle --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+            <i class="fas fa-warehouse" aria-hidden="true"></i>
+        </span>
+        <input type="text" id="max_vehicles" name="max_vehicles" value="{{ old('max_vehicles') }}" required
+            placeholder="Max Vehicle"
+            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    </div>
 
-        <div class="mb-4">
-            <label for="description" class="block text-gray-700 font-semibold mb-2">Description</label>
-            <textarea id="description" name="description" rows="3"
-                      class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ old('description') }}</textarea>
-        </div>
+    {{-- Description --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+            <i class="fa fa-file-alt" aria-hidden="true"></i>
+        </span>
+        <input type="text" id="description" name="description" value="{{ old('description') }}"
+            placeholder="Description"
+            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    </div>
 
-        <div class="mb-6">
-            <label class="inline-flex items-center">
-                <input type="checkbox" name="is_active" value="1" 
-                       {{ old('is_active', true) ? 'checked' : '' }}
-                       class="form-checkbox text-indigo-600" />
-                <span class="ml-2 text-gray-700 font-semibold">Aktifkan</span>
-            </label>
-        </div>
+    {{-- Checkbox Aktif --}}
+    <div x-data="{ isActive: {{ old('is_active', true) ? 'true' : 'false' }} }" class="mb-4">
+        <label for="is_active"
+            class="flex items-center text-sm font-semibold text-gray-800 dark:text-gray cursor-pointer select-none">
+            <div class="relative">
+                <input type="checkbox" id="is_active" name="is_active" value="1" x-model="isActive" class="sr-only"
+                    :checked="isActive" />
+                <div :class="isActive ? 'bg-indigo-600 border-indigo-600' : 'bg-white border-gray-300 dark:border-gray-700'"
+                    class="mr-2 flex h-4 w-4 items-center justify-center rounded border transition-colors duration-200">
+                    <svg x-show="isActive" class="w-3 h-3 text-white" fill="none" stroke="currentColor"
+                        stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                </div>
+            </div>
+            Aktifkan
+        </label>
+    </div>
 
-        <div class="flex items-center justify-between">
-            <a href="/vehicle-type" 
-               class="text-gray-600 hover:text-gray-900">Batal</a>
-
-            <button type="submit" 
-                    class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
-                Simpan
-            </button>
-        </div>
-    </form>
-</div>
-@endsection
+    {{-- Tombol Aksi --}}
+    <div class="flex justify-between items-center">
+        <button @click="showCreateModal = false"
+            class="text-sm font-semibold text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition transition">Cencle
+        </button>
+        <button type="submit"
+            class="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-indigo-700 transition">
+            Submit
+        </button>
+    </div>
+</form>

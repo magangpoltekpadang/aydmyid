@@ -2,6 +2,7 @@
 
 namespace App\Models\Notification;
 
+use App\Models\Customer\Customer;
 use App\Models\NotificationStatuses\NotificationStatuses;
 use App\Models\NotificationType\NotificationType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,6 +29,11 @@ class Notification extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'customer_id');
+    }
 
     public function notificationType()
     {

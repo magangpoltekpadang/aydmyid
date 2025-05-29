@@ -1,23 +1,23 @@
 @extends('layout.main')
 
 @section('content')
-<div x-data="{ ...roleData()}" x-init="init()" class="space-y-6">
+<div x-data="{ ...roleData(), showCreateModal: false, showEditModal: false }" class="space-y-6">
     <!-- Header and Create Button -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold text-gray-800">Role</h1>
-        <a href="/role/create" 
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            + Add Role
-        </a>
+        <button @click="showCreateModal = true;"
+                class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                + Add Role
+            </button>
     </div>
 
     <!-- Roles Table -->
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
-                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-blue-600 bg-blue-50 dark:text-white dark:bg-blue-600">
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-purple-600 bg-purple-50 dark:text-white dark:bg-purple-600">
                       <th class="px-4 py-3">Role Name</th>
                       <th class="px-4 py-3">Code</th>
                       <th class="px-4 py-3">Description</th>
@@ -31,10 +31,9 @@
                             <td class="px-4 py-3 text-sm text-gray-500" x-text="role.code"></td>
                             <td class="px-4 py-3 text-sm text-gray-500" x-text="role.description || '-'"></td>
                             <td class="px-4 py-3 text-xs">
-                                <a :href="`/role/${role.role_id}/edit`"
-                                    class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                <button @click="startEdit(role)" class="text-blue-600 hover:text-blue-900 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                 <button @click="confirmDelete(role.role_id)" class="text-red-600 hover:text-red-900">
                                 <i class="fas fa-trash"></i>
                                 </button>
@@ -55,9 +54,25 @@
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Confirm Delete</h2>
             <p class="text-gray-600 mb-6">Are you sure you want to delete this role?</p>
             <div class="flex justify-end space-x-3">
-                <button @click="showDeleteModal = false" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
-                <button @click="deleteRole()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                <button @click="showDeleteModal = false" 
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+                <button @click="deleteRole()" 
+                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Create-->
+    <div x-show="showCreateModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div @click.away="showCreateModal = false" class="bg-white rounded-lg shadow w-full max-w-md mx-4">
+            @include('Role.create') {{-- Memanggil form dari file create.blade.php --}}
+        </div>
+    </div>
+
+    <!-- Modal Create-->
+    <div x-show="showEditModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div @click.away="showEditModal = false" class="bg-white rounded-lg shadow w-full max-w-md mx-4">
+            @include('Role.edit') {{-- Memanggil form dari file edit.blade.php --}}
         </div>
     </div>
 </div>

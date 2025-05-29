@@ -16,8 +16,7 @@ class PaymentMethod extends Model
     protected $fillable = [
         'method_name',
         'code',
-        'is_active',
-        'description'
+        'is_active'
     ];
 
     protected $casts = [

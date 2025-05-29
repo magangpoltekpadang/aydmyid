@@ -13,7 +13,15 @@ function vehicleTypeData() {
       links: []
     },
     showDeleteModal: false,
+    showCreateModal: false,
+    showEditModal: false,
     vehicleTypeIdToDelete: null,
+    editedVehicleType: {
+        vehicle_type_id: null,
+        type_name: '',
+        code: '',
+        description: '',
+    },
     
 
     init() {
@@ -52,6 +60,7 @@ function vehicleTypeData() {
                     console.error('GraphQL errors:', result.errors);
                     return;
                 }
+                
                 console.log('Fetched data:', result.data.vehicleTypes);
 
                 this.vehicleTypes = result.data.vehicleTypes || [];
@@ -109,6 +118,13 @@ function vehicleTypeData() {
       console.log('Deleting ID:', id); // cek apakah ID-nya muncul
       this.vehicleTypeIdToDelete = id;
       this.showDeleteModal = true;
+      this.showCreateModal = false;
+      this.showEditModal = false;
+    },
+
+    startEdit(vehicleType) {
+      this.editedVehicleType = { ...vehicleType };
+      this.showEditModal = true;
     },
 
     async deleteVehicleType() {
@@ -124,11 +140,31 @@ function vehicleTypeData() {
 
         if (response.ok) {
           this.showDeleteModal = false;
+          this.showCreateModal = false;
+          this.showEditModal = false;
           await this.fetchVehicleTypes();
         }
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+
+    async updateVehicleType() {
+      fetch(`/vehicle-type/${this.editedVehicleType.vehicle_type_id}`, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify(this.editedVehicleType)
+      })
+      .then(response => response.json())
+      .then(data => {
+          this.showEditModal = false;
+          this.fetchVehicleTypes(); // refresh data dari server
+      })
+      .catch(error => console.log('Error updating vehicle type:', error));
     }
   };
 }

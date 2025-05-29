@@ -12,7 +12,7 @@ input ServiceTypeCreateInput {
     type_name: String!
     code: String!
     description: String
-    is_active: Boolean = true
+    is_active: Boolean
 }
 
 input ServiceTypeUpdateInput {
@@ -22,10 +22,23 @@ input ServiceTypeUpdateInput {
     is_active: Boolean
 }
 
+input ServiceTypeFilter {
+  id: ID
+  code: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  serviceTypes: [ServiceType!]! @all(model: "App\\Models\\ServiceType\\ServiceType")
-  serviceType(service_type_id: ID! @eq): ServiceType @find(model: "App\\Models\\ServiceType\\ServiceType")
-  activeServiceTypes: [ServiceType!]! @all(model: "App\\Models\\ServiceType\\ServiceType", scoops: ["active"])
+  serviceTypes(
+    search: String
+    is_active: Boolean
+  ): [ServiceType!]! 
+    @all(model: "App\\Models\\ServiceType\\ServiceType")
+  serviceType(service_type_id: ID! @eq): ServiceType 
+    @find(model: "App\\Models\\ServiceType\\ServiceType")
+  activeServiceTypes: [ServiceType!]! 
+    @all(model: "App\\Models\\ServiceType\\ServiceType", scoops: ["active"])
 }
 
 extend type Mutation {
@@ -40,4 +53,9 @@ extend type Mutation {
   deleteServiceType(service_type_id: ID! @eq(key: "service_type_id")): ServiceType
     @delete(model: "App\\Models\\ServiceType\\ServiceType")
 
+}
+
+type ServiceTypePaginator {
+  data: [ServiceType!]!
+  paginatorInfo: paginatorInfo!
 }

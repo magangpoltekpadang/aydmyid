@@ -13,8 +13,18 @@ function membershipPackageData() {
       links: []
     },
     showDeleteModal: false,
+    showCreateModal: false,
+    showEditModal: false,
     membershipPackageIdToDelete: null,
-    
+    editedMembershipPackage: {
+        package_id: null,
+        package_name: '',
+        duration_days: '',
+        price: '',
+        max_vehicles: '', 
+        description: '',
+    },
+
 
     init() {
       this.fetchMembershipPackages();
@@ -111,9 +121,16 @@ function membershipPackageData() {
       console.log('Deleting ID:', id); // cek apakah ID-nya muncul
       this.membershipPackageIdToDelete = id;
       this.showDeleteModal = true;
+      this.showCreateModal = false;
+      this.showEditModal = false;
     },
 
-    async deleteMemebershipPackage() {
+    startEdit(membershipPackage) {
+      this.editedMembershipPackage = { ...membershipPackage };
+      this.showEditModal = true;
+    },
+
+    async deleteMembershipPackage() {
       try {
         const response = await fetch(`/membership-package/${this.membershipPackageIdToDelete}`, {
           method: 'DELETE',
@@ -126,11 +143,31 @@ function membershipPackageData() {
 
         if (response.ok) {
           this.showDeleteModal = false;
+          this.showCreateModal = false;
+          this.showEditModal = false;
           await this.fetchMembershipPackages();
         }
       } catch (error) {
         console.error('Error:', error);
       }
+    },
+
+    async updateMembershipPackage() {
+      fetch(`/membership-package/${this.editedMembershipPackage.package_id}`, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+          },
+          body: JSON.stringify(this.editedMembershipPackage)
+      })
+      .then(response => response.json())
+      .then(data => {
+          this.showEditModal = false;
+          this.fetchMembershipPackages(); // refresh data dari server
+      })
+      .catch(error => console.log('Error updating membership package:', error));
     }
   };
 }

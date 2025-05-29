@@ -1,15 +1,15 @@
 @extends('layout.main')
 
 @section('content')
-<div x-data="{ ...membershipPackageData()}" class="space-y-6">
+<div x-data="{ ...membershipPackageData(), showCreateModal: false, showEditModal: false}" class="space-y-6">
     <!-- Header and Create Button -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="flex items-center justify-between">
         <h1 class="text-2xl font-bold text-gray-800">Membership Package</h1>
-        <a href="/membership-package/create" 
-            class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-            + Add Package
-        </a>
+        <button @click="showCreateModal = true;"
+                class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                + Add Package
+            </button>
     </div>
 
     <!-- Stats Cards -->
@@ -17,7 +17,7 @@
 
         <!-- Total Membership Package -->
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
-            <div class="w-12 h-12 mr-4 flex items-center justify-center text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+            <div class="w-12 h-12 mr-4 flex items-center justify-center text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
                 <i class="fas fa-box text-xl"></i>
             </div>
             <div>
@@ -61,13 +61,13 @@
             <!-- Search Field -->
             <div>
                 <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
-                <input type="text" id="search" x-model="search" placeholder="Type to search..." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <input type="text" id="search" x-model="search" placeholder="Type to search..." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
             </div>
 
             <!-- Status Filter -->
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                <select id="status" x-model="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <select id="status" x-model="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
                     <option value="">All</option>
                     <option value="1">Active</option>
                     <option value="0">Inactive</option>
@@ -85,12 +85,12 @@
         </div>
     </div>
 
-    <!-- Vehicle Types Table -->
+    <!-- Membership Package Table -->
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
-                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-blue-600 bg-blue-50 dark:text-white dark:bg-blue-600">
+                    <tr class="text-xs font-semibold tracking-wide text-left text-white-500 uppercase border-b dark:border-purple-600 bg-purple-50 dark:text-white dark:bg-purple-600">
                         <th class="px-4 py-3">Package Name</th>
                         <th class="px-4 py-3">Duration Days</th>
                         <th class="px-4 py-3">Price</th>
@@ -115,10 +115,9 @@
                                 </span>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a :href="`/membership-package/${membershipPackage.package_id}/edit`"
-                                    class="text-blue-600 hover:text-blue-900 mr-3">
-                                    <i class="fas fa-edit"></i>
-                                </a>
+                                 <button @click="startEdit(membershipPackage)" class="text-purple-600 hover:text-purple-900 mr-3">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
                                 <button @click="confirmDelete(membershipPackage.package_id)" class="text-red-600 hover:text-red-900">
                                 <i class="fas fa-trash"></i>
                                 </button>
@@ -126,7 +125,7 @@
                         </tr>
                     </template>
                     <tr x-show="membershipPackages.length === 0">
-                        <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">No Vehicle Types Found</td>
+                        <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">No Membership Package Found</td>
                     </tr>
                 </tbody>
             </table>
@@ -164,7 +163,7 @@
                         <template x-for="page in pagination.links" :key="page.label">
                             <button @click="changePage(page.label)"
                                     :disabled="!Number.isInteger(Number(page.label)) || page.active"
-                                    :class="page.active ? 'z-10 bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'"
+                                    :class="page.active ? 'z-10 bg-purple-50 border-purple-500 text-purple-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'"
                                     class="relative inline-flex items-center px-4 py-2 border text-sm font-medium"
                                     x-text="page.label">
                             </button>
@@ -186,15 +185,32 @@
             </div>
         </div>
     </div>
+
     <!-- Delete Confirmation Modal -->
     <div x-show="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
         <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Confirm Delete</h2>
             <p class="text-gray-600 mb-6">Are you sure you want to delete this package?</p>
             <div class="flex justify-end space-x-3">
-                <button @click="showDeleteModal = false" class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
-                <button @click="deleteMembershipPackage()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                <button @click="showDeleteModal = false" 
+                    class="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300">Cancel</button>
+                <button @click="deleteMembershipPackage()" 
+                    class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal Create-->
+    <div x-show="showCreateModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div @click.away="showCreateModal = false" class="bg-white rounded-lg shadow w-full max-w-md mx-4">
+            @include('MembershipPackage.create') {{-- Memanggil form dari file create.blade.php --}}
+        </div>
+    </div>
+
+    <!-- Modal Create-->
+    <div x-show="showEditModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+        <div @click.away="showEditModal = false" class="bg-white rounded-lg shadow w-full max-w-md mx-4">
+            @include('MembershipPackage.edit') {{-- Memanggil form dari file edit.blade.php --}}
         </div>
     </div>
 </div>

@@ -13,10 +13,10 @@ input VehicleTypeCreateInput {
     type_name: String!
     code: String
     description: String
-    is_active: Boolean = true
+    is_active: Boolean 
 }
 
-input VehicleTypeInput {
+input VehicleTypeUpdateInput {
     type_name: String
     code: String
     description: String
@@ -34,9 +34,12 @@ extend type Query {
   vehicleTypes(
     search: String
     is_active: Boolean
-  ): [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType")
-  vehicleType(vehicle_type_id: ID! @eq): VehicleType @find(model: "App\\Models\\VehicleType\\VehicleType")
-  activeVehicleTypes: [VehicleType!]! @all(model: "App\\Models\\VehicleType\\VehicleType", scoops: ["active"])
+  ): [VehicleType!]! 
+    @all(model: "App\\Models\\VehicleType\\VehicleType")
+  vehicleType(vehicle_type_id: ID! @eq): VehicleType 
+    @find(model: "App\\Models\\VehicleType\\VehicleType")
+  activeVehicleTypes: [VehicleType!]! 
+    @all(model: "App\\Models\\VehicleType\\VehicleType", scoops: ["active"])
 }
 
 extend type Mutation {
@@ -54,6 +57,6 @@ extend type Mutation {
 }
 
 type VehicleTypePaginator {
-  data: [VahicleType!]!
+  data: [VehicleType!]!
   paginatorInfo: paginatorInfo!
 }

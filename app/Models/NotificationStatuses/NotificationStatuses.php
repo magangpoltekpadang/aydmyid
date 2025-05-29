@@ -16,7 +16,7 @@ class NotificationStatuses extends Model
     protected $fillable = [
         'status_name',
         'code',
-        'desctiption'
+        'description'
     ];
 
     protected $casts = [

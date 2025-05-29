@@ -21,9 +21,7 @@ input PaymentStatusUpdateInput {
 
 extend type Query {
   paymentStatuses: [PaymentStatus!]! @all(model: "App\\Models\\PaymentStatus\\PaymentStatus")
-
-  paymentStatus(payment_status_id: ID! @eq(key: "payment_status_id")): PaymentStatus
-  @find(model: "App\\Models\\PaymentStatus\\PaymentStatus")
+  paymentStatus(payment_status_id: ID! @eq): PaymentStatus @find(model: "App\\Models\\PaymentStatus\\PaymentStatus")
 }
 
 extend type Mutation {

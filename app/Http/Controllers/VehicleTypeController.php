@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\VehicleType\VehicleType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class VehicleTypeController extends Controller
 {
@@ -12,8 +11,7 @@ class VehicleTypeController extends Controller
     {
         $query = VehicleType::query();
         $vehicleTypes = $query->paginate(10)->withQueryString();
-
-        return view('VehicleType.index'); // view awal
+        return view('VehicleType.index');
     }
 
     public function create()
@@ -23,7 +21,6 @@ class VehicleTypeController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi input
         $validated = $request->validate([
             'type_name' => 'required|string|max:255',
             'code' => 'nullable|string|max:50',
@@ -31,10 +28,8 @@ class VehicleTypeController extends Controller
             'is_active' => 'nullable|in:1,0',
         ]);
 
-        // Simpan data ke DB
+        $validated['is_active'] = $request->has('is_active') ? 1 : 0;
         VehicleType::create($validated);
-
-        // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('vehicle-type.index')->with('success', 'Vehicle type berhasil ditambahkan.');
     }
 
@@ -47,17 +42,9 @@ class VehicleTypeController extends Controller
     public function update(Request $request, $id)
     {
         $vehicleType = VehicleType::findOrFail($id);
-
-        $vehicleType->update([
-            'type_name' => $request->type_name,
-            'code' => $request->code,
-            'description' => $request->description,
-            'is_active' => $request->has('is_active'),
-        ]);
-
-        return redirect()->route('vehicle-type.index')->with('success', 'Vehicle Type updated successfully.');
+        $vehicleType->update($request->only(['type_name', 'code', 'description', 'is_active']));
+        return response()->json(['message' => 'Updated successfully']);
     }
-
 
     public function destroy($id)
     {
@@ -65,5 +52,4 @@ class VehicleTypeController extends Controller
         $vehicleType->delete();
         return response()->json(['message' => 'Deleted successfully']);
     }
-
 }

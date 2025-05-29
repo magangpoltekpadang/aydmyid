@@ -31,7 +31,8 @@ input NotificationUpdateInput {
 
 extend type Query {
   notifications: [Notification!]! @all(model: "App\\Models\\Notification\\Notification")
-  notification(notification_id: ID! @eq): Notification @find(model: "App\\Models\\Notification\\Notification")
+  notification(notifications_id: ID! @eq): Notification @find(model: "App\\Models\\Notification\\Notification")
+  notificatioCustomer(customer_id: ID! @eq): [Notification!]! @all(model: "App\\Models\\Notification\\Notification")
   notificationNotificationType(notification_type_id: ID! @eq): [Notification!]! @all(model: "App\\Models\\Notification\\Notification")
   notificatioNotificationStatus(status_id: ID! @eq): [Notification!]! @all(model: "App\\Models\\Notification\\Notification")
 }

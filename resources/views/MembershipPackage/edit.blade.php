@@ -1,50 +1,61 @@
-@extends('layout.main')
+<form @submit.prevent="updateMembershipPackage" class="rounded-xl border border-gray-200 dark:bg-white-900 dark:border-white p-5 space-y-5 shadow-sm">
+    @csrf
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Edit Package</h2>
 
-@section('content')
-<div class="container mx-auto px-4 py-6 max-w-lg">
+    {{-- Package Name --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
+            <i class="fas fa-box" aria-hidden="true"></i>
+        </span>
+        <input type="text" x-model="editedMembershipPackage.package_name" class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm"/>
+    </div>
 
-    <form action="{{ route('membership-package.update',  $membershipPackage->package_id) }}" method="POST" class="bg-white shadow rounded px-8 py-6">
-        @csrf
-        @method('PUT')
-        
-        <h1 class="text-2xl font-bold mb-6">Edit Membership Package</h1>
-        <div>
-            <label class="block text-gray-700 font-semibold mb-2">Package Name</label>
-            <input type="text" name="package_name" value="{{ old('package_name', $membershipPackage->package_name) }}"
-                   class="w-full border px-4 py-2 rounded" required>
-        </div>
+    {{-- Duration Day --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+        </span>
+        <input type="text" x-model="editedMembershipPackage.duration_days" class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm"/>
+    </div>
 
-        <div>
-            <label class="block text-gray-700">Duration Days</label>
-            <input type="text" name="duration_days" value="{{ old('duration_days', $membershipPackage->duration_days) }}"
-                   class="w-full border px-4 py-2 rounded">
-        </div>
+    {{-- Price --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
+            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+        </span>
+        <input type="text" x-model="editedMembershipPackage.price" class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm"/>
+    </div>
 
-        <div>
-            <label class="block text-gray-700">Price</label>
-            <input type="text" name="price" value="{{ old('price', $membershipPackage->price) }}"
-                   class="w-full border px-4 py-2 rounded">
-        </div>
+    {{-- Max Vehicle --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
+            <i class="fas fa-warehouse" aria-hidden="true"></i>
+        </span>
+        <input type="text" x-model="editedMembershipPackage.max_vehicles" class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm"/>
+    </div>
 
-        <div>
-            <label class="block text-gray-700">Max Vehicles</label>
-            <input type="text" name="max_vehicles" value="{{ old('max_vehicles', $membershipPackage->max_vehicles) }}"
-                   class="w-full border px-4 py-2 rounded">
-        </div>
+    {{-- Description --}}
+    <div class="relative">
+        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
+            <i class="fa fa-file-alt" aria-hidden="true"></i>
+        </span>
+        <textarea type="text" x-model="editedMembershipPackage.description" class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm"></textarea>
+    </div>
 
-        <div>
-            <label class="block text-gray-700">Description</label>
-            <textarea name="description" class="w-full border px-4 py-2 rounded">{{ old('description', $membershipPackage->description) }}</textarea>
-        </div>
-
-        <div>
-            <label class="inline-flex items-center">
-                <input type="checkbox" name="is_active" {{ $membershipPackage->is_active ? 'checked' : '' }} class="form-checkbox">
+   {{-- Checkbox Aktif --}}
+    <label class="inline-flex items-center">
+                <input type="checkbox" x-model="editedMembershipPackage.is_active" class="form-checkbox">
                 <span class="ml-2">Active</span>
             </label>
-        </div>
 
-        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Update</button>
-    </form>
-</div>
-@endsection
+    {{-- Tombol Aksi --}}
+    <div class="flex justify-between items-center">
+        <button @click="showEditModal = false" 
+            class="text-sm font-semibold text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition transition">Cencle
+        </button>
+        <button @click="updateMembershipPackage()"
+            class="bg-indigo-600 text-white text-sm font-semibold px-4 py-2 rounded hover:bg-indigo-700 transition">
+            Update
+        </button>
+    </div>     
+</form>

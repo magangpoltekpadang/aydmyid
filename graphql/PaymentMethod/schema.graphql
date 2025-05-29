@@ -10,7 +10,7 @@ type PaymentMethod {
 input PaymentMethodCreateInput {
     method_name: String!
     code: String!
-    is_active: Boolean = true
+    is_active: Boolean
 }
 
 input PaymentMethodUpdateInput {
@@ -19,10 +19,23 @@ input PaymentMethodUpdateInput {
     is_active: Boolean
 }
 
+input PaymentMethodFilter {
+  id: ID
+  code: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  paymentMethods: [PaymentMethod!]! @all(model: "App\\Models\\PaymentMethod\\PaymentMethod")
-  paymentMethod(payment_method_id: ID! @eq): PaymentMethod @find(model: "App\\Models\\PaymentMethod\\PaymentMethod")
-  activePaymentMethods: [PaymentMethod!]! @all(model: "App\\Models\\PaymentMethod\\PaymentMethod", scoops: ["active"])
+  paymentMethods(
+    search: String
+    is_active: Boolean
+  ): [PaymentMethod!]! 
+    @all(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+  paymentMethod(payment_method_id: ID! @eq): PaymentMethod 
+    @find(model: "App\\Models\\PaymentMethod\\PaymentMethod")
+  activePaymentMethods: [PaymentMethod!]! 
+    @all(model: "App\\Models\\PaymentMethod\\PaymentMethod", scoops: ["active"])
 }
 
 extend type Mutation {
@@ -37,4 +50,9 @@ extend type Mutation {
   deletePaymentMethod(payment_method_id: ID! @eq(key: "payment_method_id")): PaymentMethod
     @delete(model: "App\\Models\\PaymentMethod\\PaymentMethod")
 
+}
+
+type paymentMethodPaginator {
+  data: [PaymentMethod!]!
+  paginatorInfo: paginatorInfo!
 }
