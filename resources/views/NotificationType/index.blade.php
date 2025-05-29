@@ -116,10 +116,10 @@
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 text-sm text-gray-500">
-                                    <button @click="startEdit(notification)" class="text-blue-600 hover:text-blue-900 mr-3">
+                                    <button @click="startEdit(notificationType)" class="text-blue-600 hover:text-blue-900 mr-3">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button @click="confirmDelete(notification.notification_type_id)"
+                                    <button @click="confirmDelete(notificationType.notification_type_id)"
                                         class="text-red-500 hover:text-red-500">
                                         <i class="fas fa-trash"></i>
                                     </button>
