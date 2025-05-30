@@ -18,7 +18,7 @@
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-white-800">
                 <div
                     class="w-12 h-12 mr-4 flex items-center justify-center text-purple-500 bg-purple-100 rounded-full dark:text-purple-100 dark:bg-purple-500">
-                    <i class="fas fa-car text-xl"></i>
+                    <i class="fas fa-tags text-xl"></i>
                 </div>
                 <div>
                     <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-700">Total Vehicles</p>
