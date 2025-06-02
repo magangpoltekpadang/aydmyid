@@ -7,7 +7,7 @@
     {{-- Name --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-user" aria-hidden="true"></i>
         </span>
         <input type="text" x-model="editedStaff.name"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
@@ -16,7 +16,7 @@
     {{--Email --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-envelope" aria-hidden="true"></i>
         </span>
         <input type="email" x-model="editedStaff.email"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
@@ -25,7 +25,7 @@
     {{-- Phone Number --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-phone" aria-hidden="true"></i>
         </span>
         <input type="text" x-model="editedStaff.phone_number"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
@@ -34,7 +34,7 @@
     {{--Password --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-lock" aria-hidden="true"></i>
         </span>
         <input type="password" x-model="editedStaff.password_hash"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
@@ -43,7 +43,7 @@
     {{-- Outlet Id --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-store" aria-hidden="true"></i>
         </span>
         <select x-model="editedStaff.outlet_id"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm">
@@ -57,7 +57,7 @@
     {{--Role Id --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-user-tag" aria-hidden="true"></i>
         </span>
         <select x-model="editedStaff.role_id"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm">

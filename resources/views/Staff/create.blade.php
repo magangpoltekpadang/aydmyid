@@ -7,7 +7,7 @@
     {{-- Name --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-user" aria-hidden="true"></i>
         </span>
         <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -16,7 +16,7 @@
     {{-- Email --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-envelope" aria-hidden="true"></i>
         </span>
         <input type="emial" id="email" name="email" value="{{ old('email') }}" placeholder="Email"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -25,7 +25,7 @@
     {{-- Phone Number --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-phone" aria-hidden="true"></i>
         </span>
         <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -34,7 +34,7 @@
     {{-- Password --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
+            <i class="fas fa-lock" aria-hidden="true"></i>
         </span>
         <input type="password" id="password_hash" name="password_hash" value="{{ old('password_hash') }}" placeholder="Password"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -43,7 +43,7 @@
     {{-- Outlet Id --}}
     <div class="relative mb-4">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-store" aria-hidden="true"></i>
         </span>
         <select id="outlet_id" name="outlet_id"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
@@ -59,7 +59,7 @@
     {{-- Role Id --}}
     <div class="relative mb-4">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-clock" aria-hidden="true"></i>
+            <i class="fas fa-user-tag" aria-hidden="true"></i>
         </span>
         <select id="role_id" name="role_id"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
