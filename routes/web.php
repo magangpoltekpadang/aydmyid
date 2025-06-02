@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\MembershipPackageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\NotificationStatusesController;
@@ -9,10 +11,12 @@ use App\Http\Controllers\OutletController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PaymentStatusController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceTypeController;
+use App\Http\Controllers\StaffController;
 use App\Http\Controllers\VehicleTypeController;
-use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::resource('/', DashboardController::class);
@@ -26,3 +30,7 @@ Route::resource('payment-method', PaymentMethodController::class);
 Route::resource('payment-status', PaymentStatusController::class);
 Route::resource('service-type', ServiceTypeController::class);
 Route::resource('notification', NotificationController::class);
+Route::resource('customer', CustomerController::class);
+Route::resource('expense', ExpenseController::class);
+Route::resource('service', ServiceController::class);
+Route::resource('staff', StaffController::class);

@@ -3,6 +3,8 @@
 namespace App\Models\Expense;
 
 use App\Models\Outlet\Outlet;
+use App\Models\Shift\Shift;
+use App\Models\Staff\Staff;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,5 +35,15 @@ class Expense extends Model
     public function outlet()
     {
         return $this->belongsTo(Outlet::class, 'outlet_id', 'outlet_id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsTo(Staff::class, 'staff_id', 'staff_id');
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class, 'shift_id', 'shift_id');
     }
 }

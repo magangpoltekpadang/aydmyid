@@ -1,26 +1,26 @@
 
 type Staff {
     staff_id: ID!
-    name: String!
-    email: String!
-    phone_number: String!
-    password_hash: String!
-    outlet_id: ID!
-    role_id: ID!
+    name: String
+    email: String
+    phone_number: String
+    password_hash: String
+    outlet_id: ID
+    role_id: ID
     is_active: Boolean
     last_login: DateTime
-    created_at: DateTime!
-    updated_at: DateTime!
+    created_at: DateTime
+    updated_at: DateTime
 }
 
 input StaffCreateInput {
-    name: String!
-    email: String!
-    phone_number: String!
-    password_hash: String!
-    outlet_id: ID!
-    role_id: ID!
-    is_active: Boolean = true
+    name: String
+    email: String
+    phone_number: String
+    password_hash: String
+    outlet_id: ID
+    role_id: ID
+    is_active: Boolean
     last_login: DateTime
 }
 
@@ -35,8 +35,18 @@ input StaffUpdateInput {
     last_login: DateTime
 }
 
+input StaffFilter {
+  id: ID
+  name: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  staffs: [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
+  staffs(
+    search: String
+    is_active: Boolean
+  ): [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
   staff(staff_id: ID! @eq): Staff @find(model: "App\\Models\\Staff\\Staff")
   activeStaff: [Staff!]! @all(model: "App\\Models\\Staff\\Staff", scoops: ["active"])
   outletStaff(outlet_id: ID! @eq): [Staff!]! @all(model: "App\\Models\\Staff\\Staff")
@@ -57,3 +67,7 @@ extend type Mutation {
 
 }
 
+type StaffPaginator {
+  data: [Staff!]!
+  paginatorInfo: paginatorInfo!
+}

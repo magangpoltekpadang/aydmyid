@@ -46,7 +46,6 @@
                     </tbody>
             </table>
         </div>
-
     </div>
     <!-- Delete Confirmation Modal -->
     <div x-show="showDeleteModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">

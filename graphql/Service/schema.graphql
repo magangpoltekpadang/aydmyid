@@ -31,10 +31,22 @@ input ServiceUpdateInput {
     outlet_id: ID
 }
 
+input ServiceFilter {
+  id: ID
+  service_name: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  services: [Service!]! @all(model: "App\\Models\\Service\\Service")
+  services(
+    search: String
+    is_active: Boolean
+  ): [Service!]! @all(model: "App\\Models\\Service\\Service")
   service(service_id: ID! @eq): Service @find(model: "App\\Models\\Service\\Service")
   activeServices: [Service!]! @all(model: "App\\Models\\Service\\Service", scoops: ["active"])
+  servicetypeService(service_type_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Service\\Service")
+  outletService(outlet_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Service\\Service")
 }
 
 extend type Mutation {

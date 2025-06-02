@@ -2,6 +2,7 @@
 
 namespace App\Models\Service;
 
+use App\Models\Outlet\Outlet;
 use App\Models\ServiceType\ServiceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,6 +34,11 @@ class Service extends Model
     public function serviceType()
     {
         return $this->belongsTo(ServiceType::class, 'service_type_id', 'service_type_id');
+    }
+
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class, 'outlet_id', 'outlet_id');
     }
 
     public function scopeActive($query)

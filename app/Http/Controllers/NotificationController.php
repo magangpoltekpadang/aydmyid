@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer\Customer;
 use App\Models\Notification\Notification;
+use App\Models\NotificationStatuses\NotificationStatuses;
+use App\Models\NotificationType\NotificationType;
 use Illuminate\Http\Request;
-
 
 class NotificationController extends Controller
 {
     public function index(Request $request)
     {
         $query = Notification::query();
-        $notifications = $query->paginate(10)->withQueryString();
-        return view('Notification.index');
+        $notification = $query->paginate(10)->withQueryString();
+        $customers = Customer::all();
+        $notification_types = NotificationType::all();
+        $notification_statuses = NotificationStatuses::all();
+        return view('Notification.index', compact('customers', 'notification_types', 'notification_statuses')); 
     }
 
     public function create()
@@ -25,19 +30,20 @@ class NotificationController extends Controller
         $validated = $request->validate([
             'customer_id' => 'required|integer|exists:customers,customer_id',
             'notification_type_id' => 'required|integer|exists:notification_types,notification_type_id',
-            'message' => 'nullable|string|200',
-            'sent_at' => 'nullable|date_format:Y-m-d H:i:s',
+            'message' => 'required|string',
             'status_id' => 'required|integer|exists:notification_statuses,status_id',
-            'retry_count' => 'nullable|string|200',
+            'retry_count' => 'nullable|integer',
         ]);
+        $validated['sent_at'] = now();
+        
         Notification::create($validated);
-        return redirect()->route('notification.index')->with('success', 'Notification berhasil ditambahkan.');
+        return redirect()->route('notification.index')->with('success', 'Customer berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $notification = Notification::findOrFail($id);
-        return view('Notification.edit', compact('vnotification'));
+        return view('Notification.edit', compact('notification'));
     }
 
     public function update(Request $request, $id)

@@ -3,83 +3,70 @@
     @csrf
     <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Type</h2>
 
-    {{-- Customer Id --}}
-    <div class="relative">
+    {{-- CustomerId --}}
+    <div class="relative mb-4">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-car" aria-hidden="true"></i>
+            <i class="fas fa-id-card" aria-hidden="true"></i>
         </span>
-        
-        <!-- Status Dropdown dengan Alpine.js -->
-        <div x-data="{
-                notifications: [ customer_id ],
-                selectedCustomerId: '{{ old('customer_id') }}'
-            }" class="mb-4">
-
-            <select name="customer_id" id="customer_id" x-model="selectedCustomerId"
-                class="w-full h-11 px-3 pl-9 text-sm text-gray-500 bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-                <option value="">Customer Id</option>
-                <template x-for="notification in notifications" :key="notification.customer_id">
-                    <option :value="notification.customer_id" x-text="notification.customer_id"></option>
-                </template>
-            </select>
-
-            <!-- Optional: tampilkan customerId yang dipilih -->
-            <p class="text-sm text-gray-600 mt-1" x-show="selectedCustomerId !== ''">
-                Selected: <span x-text="selectedCustomerId"></span>
-            </p>
-
-            <!-- Error dari Laravel -->
-            @error('customer_id')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
+        <select id="customer_id" name="customer_id"
+            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+            @foreach ($customers as $customer)
+                <option value="{{ $customer->customer_id }}"
+                    {{ old('customer_id') == $customer->customer_id ? 'selected' : '' }}>
+                    {{ $customer->customer_id }} {{ $customer->name ?? 'ID not found' }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
-
     {{-- Notification Type Id --}}
-    <div class="relative">
+    <div class="relative mb-4">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-key" aria-hidden="true"></i>
+            <i class="fas fa-bell" aria-hidden="true"></i>
         </span>
-        <input type="text" id="notification_type_id" name="notification_type_id"
-            value="{{ old('notification_type_id') }}" placeholder="Notification Type Id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        <select id="notification_type_id" name="notification_type_id"
+            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+            @foreach ($notification_types as $notification_type)
+                <option value="{{ $notification_type->notification_type_id }}"
+                    {{ old('notification_type_id') == $notification_type->notification_type_id ? 'selected' : '' }}>
+                    {{ $notification_type->notification_type_id }} {{ $notification_type->type_name ?? 'ID not found' }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     {{-- Message --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-key" aria-hidden="true"></i>
+            <i class="fas fa-comment" aria-hidden="true"></i>
         </span>
         <input type="text" id="message" name="message" value="{{ old('message') }}" placeholder="Message"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
     </div>
 
-    {{-- Sent At --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-key" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="sent_at" name="sent_at" value="{{ old('sent_at') }}" placeholder="Sent At"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
-    </div>
 
     {{-- Status Id --}}
-    <div class="relative">
+    <div class="relative mb-4">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-car" aria-hidden="true"></i>
+            <i class="fas fa-info-circle" aria-hidden="true"></i>
         </span>
-        <input type="text" id="status_id" name="status_id" value="{{ old('status_id') }}" required
-            placeholder="Status Id"
-            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        <select id="status_id" name="status_id"
+            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+            @foreach ($notification_statuses as $notification_status)
+                <option value="{{ $notification_status->status_id }}"
+                    {{ old('status_id') == $notification_status->status_id ? 'selected' : '' }}>
+                    {{ $notification_status->status_id }} {{ $notification_status->status_name ?? 'ID not found' }}
+                </option>
+            @endforeach
+        </select>
     </div>
 
     {{-- Retry Count --}}
     <div class="relative">
         <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-key" aria-hidden="true"></i>
+            <i class="fas fa-sync" aria-hidden="true"></i>
         </span>
-        <input type="text" id="retry_Count" name="retry_Count" value="{{ old('retry_Count') }}"
+        <input type="text" id="retry_count" name="retry_count" value="{{ old('retry_count') }}"
             placeholder="Retry Count"
             class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
     </div>
@@ -94,6 +81,7 @@
             Submit
         </button>
     </div>
+
 </form>
 
 @push('scripts')

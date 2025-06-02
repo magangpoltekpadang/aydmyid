@@ -44,31 +44,31 @@
                     </a>
                 </li>
 
-                {{-- <li class="relative px-6 py-3">
-                @if (request()->is('vehicle-type'))
-                    <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
-                @endif
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                        {{ request()->is('vehicle-type') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
-                        hover:text-purple-600 dark:hover:text-purple-600"
-                    href="/vehicle-type">
-                    <i class="fas fa-users" role="img" aria-label="Vehicle Type Management"></i>
-                    <span class="ml-4">Customer</span>
-                </a>
-            </li> --}}
-
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('vehicle-type'))
+                <li class="relative px-6 py-3">
+                    @if (request()->is('customer'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('vehicle-type') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('customer') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/vehicle-type">
+                        href="/customer">
+                        <i class="fas fa-users" role="img" aria-label="Vehicle Type Management"></i>
+                        <span class="ml-4">Customer</span>
+                    </a>
+                </li>
+
+                <li class="relative px-6 py-3">
+                    @if (request()->is('expense'))
+                        <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
+                    @endif
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
+                            {{ request()->is('expense') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            hover:text-purple-600 dark:hover:text-purple-600"
+                        href="/expense">
                         <i class="fas fa-money-bill-wave" role="img" aria-label="Vehicle Type Management"></i>
                         <span class="ml-4">Expense</span>
                     </a>
-                </li> --}}
+                </li>
 
                 <!-- Membership Package Menu -->
                 <li class="relative px-6 py-3">
@@ -218,30 +218,44 @@
                     </a>
                 </li>
 
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('role'))
-                        <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
-                    @endif
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('role') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
-                            hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/role">
-                        <i class="fas fa-concierge-bell" role="img" aria-label="User"></i>
-                        <span class="ml-4">Service</span>
-                    </a>
-                </li> --}}
+                <!-- Services Menu -->
+                <li class="relative px-6 py-3" x-data="{ isOpen: {{ request()->is('service') || request()->is('service') ? 'true' : 'false' }} }">
+                    <button @click="isOpen = !isOpen"
+                        class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 
+                        {{ request()->is('service') || request()->is('service') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }}
+                        hover:text-purple-600 dark:hover:text-purple-600">
+                        <div class="inline-flex items-center">
+                            <i class="fas fa-concierge-bell" role="img" aria-label="Service"></i>
+                            <span class="ml-4">Services</span>
+                        </div>
+                        <!-- Arrow -->
+                        <svg class="w-4 h-4 transition-transform duration-200 transform"
+                            :class="{ 'rotate-90': isOpen }" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 6L14 10L6 14V6Z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
 
-                <li class="relative px-6 py-3">
-                    @if (request()->is('service-type'))
-                        <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
-                    @endif
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('service-type') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
-                            hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/service-type">
-                        <i class="fas fa-tags" role="img" aria-label="User"></i>
-                        <span class="ml-4">Service Type</span>
-                    </a>
+                    <!-- Dropdown submenu -->
+                    <ul x-show="isOpen" x-transition class="mt-2 space-y-2 pl-6">
+                        <li>
+                            <a href="/service"
+                                class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 
+                                {{ request()->is('service') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-400' }} 
+                                hover:text-purple-600 dark:hover:text-purple-600">
+                                <i class="fas fa-concierge-bell"></i>
+                                <span class="ml-2">Service</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/service-type"
+                                class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 
+                                {{ request()->is('service-type') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-400' }} 
+                                hover:text-purple-600 dark:hover:text-purple-600">
+                                <i class="fas fa-tags"></i>
+                                <span class="ml-2">Service Type</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 {{-- <li class="relative px-6 py-3">
@@ -257,18 +271,18 @@
                     </a>
                 </li> --}}
 
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('role'))
+                <li class="relative px-6 py-3">
+                    @if (request()->is('staff'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('role') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('staff') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/role">
+                        href="/staff">
                         <i class="fas fa-user-tie" role="img" aria-label="User"></i>
                         <span class="ml-4">Staff</span>
                     </a>
-                </li> --}}
+                </li>
 
                 {{-- <li class="relative px-6 py-3">
                     @if (request()->is('role'))

@@ -38,6 +38,8 @@ extend type Query {
   expenses: [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
   expense(expense_id: ID! @eq): Expenses @find(model: "App\\Models\\Expense\\Expense")
   outletExpenses(outlet_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
+  staffExpenses(staff_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
+  shiffExpenses(shift_id: ID! @eq): [Expense!]! @all(model: "App\\Models\\Expense\\Expense")
 }
 
 extend type Mutation {

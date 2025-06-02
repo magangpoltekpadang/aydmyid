@@ -22,7 +22,6 @@ class Staff extends Model
         'password_hash',
         'outlet_id',
         'role_id',
-        'is_active',
         'last_login',
         'is_active'
     ];

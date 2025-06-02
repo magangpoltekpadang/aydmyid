@@ -22,7 +22,7 @@ input CustomerCreateInput {
     member_number: String!
     join_date: DateTime!
     member_expiry_date: DateTime!
-    is_member: Boolean = true
+    is_member: Boolean
 }
 
 input CustomerUpdateInput {
@@ -40,18 +40,18 @@ input CustomerUpdateInput {
 input CustomerFilter {
   id: ID
   plate_number: String
-  is_active: Boolean
+  is_member: Boolean
   search: String @where(operator: "like")
 }
 
 extend type Query {
   customers(
     search: String
-    is_active: Boolean
+    is_member: Boolean
   ): [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
   customer(customer_id: ID! @eq): Customer @find(model: "App\\Models\\Customer\\Customer")
   activeCustomers: [Customer!]! @all(model: "App\\Models\\Customer\\Customer", scoops: ["active"])
-  outletShift(outlet_id: ID! @eq): [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
+  vehiclettypeCustomer(vehicle_type_id: ID! @eq): [Customer!]! @all(model: "App\\Models\\Customer\\Customer")
 }
 
 extend type Mutation {
