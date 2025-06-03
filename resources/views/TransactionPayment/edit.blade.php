@@ -26,7 +26,7 @@
         <label for="payment_method_id" class="block mb-1 font-semibold">Payment Method Id</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-                <i class="fas fa-store" aria-hidden="true"></i>
+                <i class="fas fa-credit-card" aria-hidden="true"></i>
             </span>
             <select x-model="editedTransactionPayment.payment_method_id"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm">
@@ -55,21 +55,9 @@
         <label for="payment_date" class="block mb-1 font-semibold"> Payment Date</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-                <i class="fas fa-tags" aria-hidden="true"></i>
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
             </span>
             <input type="date" x-model="editedTransactionPayment.payment_date"
-                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
-        </div>
-    </div>
-
-    {{-- Reference Number --}}
-    <div>
-        <label for="reference_number" class="block mb-1 font-semibold">Reference Number</label>
-        <div class="relative">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-                <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
-            </span>
-            <input type="text" x-model="editedTransactionPayment.reference_number"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />
         </div>
     </div>
@@ -79,7 +67,7 @@
         <label for="status_id" class="block mb-1 font-semibold">Status Id</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-                <i class="fas fa-store" aria-hidden="true"></i>
+                <i class="fas fa-tasks" aria-hidden="true"></i>
             </span>
             <select name="status_id" x-model="editedTransactionPayment.status_id"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm">
@@ -96,7 +84,7 @@
         <label for="notes" class="block mb-1 font-semibold">Notes</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm">
-                <i class="fas fa-align-left" aria-hidden="true"></i>
+                <i class="fas fa-comment-dots" aria-hidden="true"></i>
             </span>
             <input type="text" x-model="editedTransactionPayment.notes"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 dark:text-grey-600 bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm" />

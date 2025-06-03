@@ -9,7 +9,7 @@
         <label for="transaction_id" class="block mb-1 font-semibold">Transaction Id</label>
         <div class="relative mb-">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-store" aria-hidden="true"></i>
+                <i class="fas fa-receipt" aria-hidden="true"></i>
             </span>
             <select id="transaction_id" name="transaction_id"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
@@ -28,7 +28,7 @@
         <label for="service_id" class="block mb-1 font-semibold">Service Id</label>
         <div class="relative mb-">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-store" aria-hidden="true"></i>
+                <i class="fas fa-concierge-bell" aria-hidden="true"></i>
             </span>
             <select id="service_id" name="service_id"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
@@ -48,7 +48,7 @@
         <label for="quantity" class="block mb-1 font-semibold">Quantity</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
             </span>
             <input type="text" id="quantity" name="quantity" value="{{ old('quantity') }}" placeholder="Quantity"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -60,7 +60,7 @@
         <label for="unit_price" class="block mb-1 font-semibold">Unit Price</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fas fa-dollar-sign" aria-hidden="true"></i>
             </span>
             <input type="text" id="unit_price" name="unit_price" value="{{ old('unit_price') }}"
                 placeholder="Unit Price"
@@ -73,7 +73,7 @@
         <label for="discount" class="block mb-1 font-semibold">Discount</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fas fa-percent" aria-hidden="true"></i>
             </span>
             <input type="text" id="discount" name="discount" value="{{ old('discount') }}" placeholder="Discount"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
@@ -85,7 +85,7 @@
         <label for="worker_id" class="block mb-1 font-semibold">Worker Id</label>
         <div class="relative mb-">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-store" aria-hidden="true"></i>
+                <i class="fas fa-user-cog" aria-hidden="true"></i>
             </span>
             <select id="worker_id" name="worker_id"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
@@ -120,12 +120,11 @@
     </div>
 
     {{-- Status --}}
-
     <div>
         <label for="status" class="block mb-1 font-semibold">Status</label>
         <div class="relative mb-">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
             </span>
             <select id="status" name="status"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
@@ -143,7 +142,7 @@
         <label for="notes" class="block mb-1 font-semibold">Notes</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fas fa-sticky-note" aria-hidden="true"></i>
             </span>
             <input type="text" id="notes" name="notes" value="{{ old('notes') }}" placeholder="Notes"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
