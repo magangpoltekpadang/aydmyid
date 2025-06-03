@@ -43,6 +43,6 @@ class TransactionPayment extends Model
 
     public function transactionService()
     {
-        return $this->belongsTo(TransactionService::class, 'status_id', 'status_id');
+        return $this->belongsTo(TransactionService::class, 'status_id', 'transaction_service_id');
     }
 }

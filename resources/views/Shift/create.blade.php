@@ -1,47 +1,62 @@
-<form action="{{ route('service-type.store') }}" method="POST"
+<form action="{{ route('shift.store') }}" method="POST"
     class="rounded-xl border border-gray-200 dark:bg-white-900 dark:border-white p-5 space-y-5 shadow-sm">
     @csrf
-    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Type</h2>
+    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Shift</h2>
 
-    {{-- Type Name --}}
+
+    {{-- Outlet Id --}}
     <div>
-        <label for="type_name" class="block mb-1 font-semibold">Type Name</label>
-        <div class="relative">
+        <label for="outlet_id" class="block mb-1 font-semibold">Outlet Id</label>
+        <div class="relative mb-">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fa fa-car" aria-hidden="true"></i>
+                <i class="fas fa-store" aria-hidden="true"></i>
             </span>
-            <input type="text" id="type_name" name="type_name" value="{{ old('type_name') }}" required
-                placeholder="Type Name"
-                class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+            <select id="outlet_id" name="outlet_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($outlets as $outlet)
+                    <option value="{{ $outlet->outlet_id }}"
+                        {{ old('outlet_id') == $outlet->outlet_id ? 'selected' : '' }}>
+                        {{ $outlet->outlet_id }} {{ $outlet->outlet_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
         </div>
     </div>
 
-    {{-- Code --}}
+
+    {{-- Shift Name --}}
     <div>
-        <label for="code" class="block mb-1 font-semibold">Code</label>
+        <label for="shift_name" class="block mb-1 font-semibold">Shift Name</label>
         <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fa fa-key" aria-hidden="true"></i>
+                <i class="fas fa-user" aria-hidden="true"></i>
             </span>
-            <input type="text" id="code" name="code" value="{{ old('code') }}" placeholder="Code"
+            <input type="text" id="shift_name" name="shift_name" value="{{ old('shift_name') }}"
+                placeholder="Shift Name"
                 class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
         </div>
     </div>
 
-
-    {{-- Description --}}
+    {{-- Start Time --}}
     <div>
-        <label for="description" class="block mb-1 font-semibold">Description</label>
-        <div class="relative">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-                <i class="fa fa-file-alt" aria-hidden="true"></i>
-            </span>
-            <input type="text" id="description" name="description" value="{{ old('description') }}"
-                placeholder="Description"
-                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
-        </div>
-
+        <label for="start_time" class="block mb-1 font-semibold">Start Time</label>
+        <input type="time" name="start_time" id="start_time" value="{{ old('start_time') }}"
+            class="w-full border rounded px-3 py-2" required>
+        @error('start_time')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
     </div>
+
+    {{-- End Time --}}
+    <div>
+        <label for="end_time" class="block mb-1 font-semibold">End Time</label>
+        <input type="time" name="end_time" id="end_time" value="{{ old('end_time') }}"
+            class="w-full border rounded px-3 py-2" required>
+        @error('end_time')
+            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+        @enderror
+    </div>
+
 
     {{-- Checkbox Aktif --}}
     <div x-data="{ isActive: {{ old('is_active') ? 'true' : 'false' }} }" class="mb-4">
@@ -72,4 +87,9 @@
             Submit
         </button>
     </div>
+
 </form>
+
+@push('scripts')
+    <script src="{{ asset('js/shift/shift-script.js') }}"></script>
+@endpush

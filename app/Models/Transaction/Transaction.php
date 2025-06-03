@@ -34,7 +34,6 @@ class Transaction extends Model
         'receipt_printed',
         'whatsapp_sent',
         'notes'
-        
     ];
 
     protected $casts = [

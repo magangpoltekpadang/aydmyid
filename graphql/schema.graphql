@@ -1,6 +1,9 @@
 # A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`.
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
 
+# A date string with format `Y-m-d `, e.g. `2018-05-23`.
+scalar Date @scalar(class: "App\\graphql\\Scalars\\Date")
+
 # A time string with format `H:i:s`, e.g. `13:43:32`.
 scalar Time @scalar(class: "App\\graphql\\Scalars\\Time")
 

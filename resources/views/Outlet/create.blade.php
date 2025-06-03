@@ -4,50 +4,65 @@
     <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Outlet</h2>
 
     {{-- Outlet Name --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-store" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="outlet_name" name="outlet_name" value="{{ old('outlet_name') }}" required
-            placeholder="Type Name"
-            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="outlet_name" class="block mb-1 font-semibold">Outlet Name</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
 
     {{-- Address --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="address" class="block mb-1 font-semibold">Address</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="Address"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Phone Number --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="phone_number" class="block mb-1 font-semibold">Phone Number</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                placeholder="Phone Number"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Latitude --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-compass" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="latitude" name="latitude" value="{{ old('latitude') }}" placeholder="Latitude"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="latitude" class="block mb-1 font-semibold">Latitude</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-compass" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="latitude" name="latitude" value="{{ old('latitude') }}" placeholder="Latitude"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Longitude --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-location-arrow" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="longitude" name="longitude" value="{{ old('longitude') }}" placeholder="Longitude"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="longitude" class="block mb-1 font-semibold">Longitude</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-location-arrow" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="longitude" name="longitude" value="{{ old('longitude') }}" placeholder="Longitude"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Checkbox Aktif --}}

@@ -14,8 +14,8 @@ type TransactionService {
   discount: Float!
   total_price: Float!
   worker_id: ID!
-  start_time: DateTime!
-  end_time: DateTime!
+  start_time: Time!
+  end_time: Time!
   status: TransactionServiceStatus!
   notes: String
   created_at: DateTime!
@@ -23,30 +23,30 @@ type TransactionService {
 }
 
 input TransactionServiceCreateInput {
-  transaction_id: ID!
-  service_id: ID!
-  quantity: Int!
-  unit_price: Float!
-  discount: Float!
-  total_price: Float!
-  worker_id: ID!
-  start_time: DateTime!
-  end_time: DateTime!
+  transaction_id: ID
+  service_id: ID
+  quantity: Int
+  unit_price: Float
+  discount: Float
+  total_price: Float
+  worker_id: ID
+  start_time: Time
+  end_time: Time
   status: TransactionServiceStatus!
   notes: String
 }
 
 input TransactionServiceUpdateInput {
-  transaction_id: ID!
-  service_id: ID!
-  quantity: Int!
-  unit_price: Float!
-  discount: Float!
-  total_price: Float!
-  worker_id: ID!
-  start_time: DateTime!
-  end_time: DateTime!
-  status: TransactionServiceStatus!
+  transaction_id: ID
+  service_id: ID
+  quantity: Int
+  unit_price: Float
+  discount: Float
+  total_price: Float
+  worker_id: ID
+  start_time: Time
+  end_time: Time
+  status: TransactionServiceStatus
   notes: String
 }
 

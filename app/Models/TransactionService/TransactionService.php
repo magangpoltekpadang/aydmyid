@@ -22,7 +22,7 @@ class TransactionService extends Model
         'quantity',
         'unit_price',
         'discount',
-        'stotal_price',
+        'total_price',
         'worker_id',
         'start_time',
         'end_time',
@@ -34,6 +34,7 @@ class TransactionService extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
+    
 
     public function transaction()
     {

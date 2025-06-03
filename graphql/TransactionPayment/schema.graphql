@@ -4,7 +4,7 @@ type TransactionPayment {
     transaction_id: ID!
     payment_method_id: ID!
     amount: Float!
-    payment_date: DateTime!
+    payment_date: Date!
     reference_number: String
     status_id: ID!
     notes: String
@@ -16,7 +16,7 @@ input TransactionPaymentCreateInput {
     transaction_id: ID!
     payment_method_id: ID!
     amount: Float
-    payment_date: DateTime!
+    payment_date: Date!
     reference_number: String!
     status_id: ID!
     notes: String
@@ -26,7 +26,7 @@ input TransactionPaymentUpdateInput {
     transaction_id: ID
     payment_method_id: ID
     amount: Float
-    payment_date: DateTime
+    payment_date: Date
     reference_number: String
     status_id: ID
     notes: String
@@ -37,7 +37,7 @@ extend type Query {
   transactionPayment(payment_id: ID! @eq): TransactionPayment @find(model: "App\\Models\\TransactionPayment\\TransactionPayment")
   transactionTrxPayment(transaction_id: ID! @eq): [TransactionPayment!]! @all(model: "App\\Models\\TransactionPayment\\TransactionPayment")
   methodTrxPayment(payment_method_id: ID! @eq): [TransactionPayment!]! @all(model: "App\\Models\\TransactionPayment\\TransactionPayment")
-  serviceTrxPayment(status_id: ID! @eq): [TransactionPayment!]! @all(model: "App\\Models\\TransactionPayment\\TransactionPayment")
+  serviceTrxPayment(transaction_service_id: ID! @eq): [TransactionPayment!]! @all(model: "App\\Models\\TransactionPayment\\TransactionPayment")
 }
 
 extend type Mutation {

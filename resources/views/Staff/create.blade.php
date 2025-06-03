@@ -5,71 +5,91 @@
 
 
     {{-- Name --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-user" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="name" class="block mb-1 font-semibold">Name</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-user" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Email --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-        </span>
-        <input type="emial" id="email" name="email" value="{{ old('email') }}" placeholder="Email"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="email" class="block mb-1 font-semibold">Email</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-envelope" aria-hidden="true"></i>
+            </span>
+            <input type="emial" id="email" name="email" value="{{ old('email') }}" placeholder="Email"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Phone Number --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" placeholder="Phone Number"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="phone_number" class="block mb-1 font-semibold">Phone Number</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                placeholder="Phone Number"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Password --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-lock" aria-hidden="true"></i>
-        </span>
-        <input type="password" id="password_hash" name="password_hash" value="{{ old('password_hash') }}" placeholder="Password"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="password" class="block mb-1 font-semibold">Password</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-lock" aria-hidden="true"></i>
+            </span>
+            <input type="password" id="password_hash" name="password_hash" value="{{ old('password_hash') }}"
+                placeholder="Password"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Outlet Id --}}
-    <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-store" aria-hidden="true"></i>
-        </span>
-        <select id="outlet_id" name="outlet_id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-            @foreach ($outlets as $outlet)
-                <option value="{{ $outlet->outlet_id }}"
-                    {{ old('outlet_id') == $outlet->outlet_id ? 'selected' : '' }}>
-                    {{ $outlet->outlet_id }} {{ $outlet->outlet_name ?? 'ID not found' }}
-                </option>
-            @endforeach
-        </select>
+    <div>
+        <label for="outlet_id" class="block mb-1 font-semibold">Outlet Id</label>
+        <div class="relative mb-4">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-store" aria-hidden="true"></i>
+            </span>
+            <select id="outlet_id" name="outlet_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($outlets as $outlet)
+                    <option value="{{ $outlet->outlet_id }}"
+                        {{ old('outlet_id') == $outlet->outlet_id ? 'selected' : '' }}>
+                        {{ $outlet->outlet_id }} {{ $outlet->outlet_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
+
     {{-- Role Id --}}
-    <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-user-tag" aria-hidden="true"></i>
-        </span>
-        <select id="role_id" name="role_id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-            @foreach ($roles as $role)
-                <option value="{{ $role->role_id }}"
-                    {{ old('role_id') == $role->role_id ? 'selected' : '' }}>
-                    {{ $role->role_id }} {{ $role->role_name ?? 'ID not found' }}
-                </option>
-            @endforeach
-        </select>
+    <div>
+        <label for="role_id" class="block mb-1 font-semibold">Role Id</label>
+        <div class="relative mb-4">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-user-tag" aria-hidden="true"></i>
+            </span>
+            <select id="role_id" name="role_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($roles as $role)
+                    <option value="{{ $role->role_id }}" {{ old('role_id') == $role->role_id ? 'selected' : '' }}>
+                        {{ $role->role_id }} {{ $role->role_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
     {{-- Checkbox Aktif --}}

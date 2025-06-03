@@ -4,24 +4,30 @@
     <h2 class="text-lg font-semibold text-gray-800 dark:text-gray">Add New Method</h2>
 
     {{-- Method Name --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-credit-card" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="method_name" name="method_name" value="{{ old('method_name') }}" required
-            placeholder="Method Name"
-            class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="type_name" class="block mb-1 font-semibold">Type Name</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-credit-card" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="method_name" name="method_name" value="{{ old('method_name') }}" required
+                placeholder="Method Name"
+                class="w-full h-11 px-3 pl-9 text-sm text-black bg-white border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
-
 
     {{-- Code --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fa fa-key" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="code" name="code" value="{{ old('code') }}" placeholder="Code"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="code" class="block mb-1 font-semibold">Code</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="code" name="code" value="{{ old('code') }}" placeholder="Code"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
+
 
     {{-- Checkbox Aktif --}}
     <div x-data="{ isActive: {{ old('is_active') ? 'true' : 'false' }} }" class="mb-4">

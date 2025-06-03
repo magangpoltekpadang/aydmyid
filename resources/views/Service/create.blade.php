@@ -5,72 +5,97 @@
 
 
     {{-- Service Name --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-code" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="service_name" name="service_name" value="{{ old('service_name') }}" placeholder="Service Name"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="service_name" class="block mb-1 font-semibold">Service Name</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-code" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="service_name" name="service_name" value="{{ old('service_name') }}"
+                placeholder="Service Name"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
+
     {{-- Service Type Id --}}
-    <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-store" aria-hidden="true"></i>
-        </span>
-        <select id="service_type_id" name="service_type_id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-            @foreach ($service_types as $service_type)
-                <option value="{{ $service_type->service_type_id }}"
-                    {{ old('service_type_id') == $service_type->service_type_id ? 'selected' : '' }}>
-                    {{ $service_type->service_type_id }} {{ $service_type->type_name ?? 'ID not found' }}
-                </option>
-            @endforeach
-        </select>
+    <div>
+        <label for="service_type_id" class="block mb-1 font-semibold">Service Type Id</label>
+        <div class="relative mb-4">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-store" aria-hidden="true"></i>
+            </span>
+            <select id="service_type_id" name="service_type_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($service_types as $service_type)
+                    <option value="{{ $service_type->service_type_id }}"
+                        {{ old('service_type_id') == $service_type->service_type_id ? 'selected' : '' }}>
+                        {{ $service_type->service_type_id }} {{ $service_type->type_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
     {{-- Price --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="price" name="price" value="{{ old('price') }}" placeholder="Price"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="price" class="block mb-1 font-semibold">Price</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="price" name="price" value="{{ old('price') }}" placeholder="Price"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Estimated Duration --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-tags" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="estimated_duration" name="estimated_duration" value="{{ old('estimated_duration') }}" placeholder="Estimated Duration"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="estimated_duration" class="block mb-1 font-semibold">Estimated Duration</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-tags" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="estimated_duration" name="estimated_duration"
+                value="{{ old('estimated_duration') }}" placeholder="Estimated Duration"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
+
 
     {{-- Description --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-align-left" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="description" name="description" value="{{ old('description') }}" placeholder="Description"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="description" class="block mb-1 font-semibold">Description</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-align-left" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="description" name="description" value="{{ old('description') }}"
+                placeholder="Description"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
+
     {{-- Outlet Id --}}
-    <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-        </span>
-        <select id="outlet_id" name="outlet_id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-            @foreach ($outlets as $outlet)
-                <option value="{{ $outlet->outlet_id }}"
-                    {{ old('outlet_id') == $outlet->outlet_id ? 'selected' : '' }}>
-                    {{ $outlet->outlet_id }} {{ $outlet->outlet_name ?? 'ID not found' }}
-                </option>
-            @endforeach
-        </select>
+    <div>
+        <label for="outlet_id" class="block mb-1 font-semibold">Outlet Id</label>
+        <div class="relative mb-4">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-clock" aria-hidden="true"></i>
+            </span>
+            <select id="outlet_id" name="outlet_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($outlets as $outlet)
+                    <option value="{{ $outlet->outlet_id }}"
+                        {{ old('outlet_id') == $outlet->outlet_id ? 'selected' : '' }}>
+                        {{ $outlet->outlet_id }} {{ $outlet->outlet_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
+
 
     {{-- Checkbox Aktif --}}
     <div x-data="{ isActive: {{ old('is_active') ? 'true' : 'false' }} }" class="mb-4">

@@ -32,7 +32,7 @@ class StaffController extends Controller
             'phone_number' => 'required|string',
             'password_hash' => 'required|string',
             'outlet_id' => 'required|integer|exists:outlets,outlet_id',
-            'outlet_id' => 'required|integer|exists:outlets,outlet_id',
+            'role_id' => 'required|integer|exists:roles,role_id',
             'is_active' => 'nullable|in:1,0',
         ]);
 

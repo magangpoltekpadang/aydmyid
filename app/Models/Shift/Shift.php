@@ -45,13 +45,4 @@ class Shift extends Model
         return $shift;
     }
 
-    protected static function booted()
-    {
-        static::saving(function ($shift) {
-            if ($shift->start_time >= $shift->end_time) {
-                throw new \Exception('Waktu mulai harus sebelum waktu selesai');
-            }
-        });
-    }
-
 }

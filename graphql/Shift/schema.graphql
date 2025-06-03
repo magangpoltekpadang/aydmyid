@@ -30,10 +30,21 @@ input ShiftUpdateInput {
     updated_at: DateTime
 }
 
+input ShiftFilter {
+  id: ID
+  shift_name: String
+  is_active: Boolean
+  search: String @where(operator: "like")
+}
+
 extend type Query {
-  shifts: [Shift!]! @all(model: "App\\Models\\Shift\\Shift")
+  shifts(
+    search: String
+    is_active: Boolean
+  ): [Shift!]! @all(model: "App\\Models\\Shift\\Shift")
   shift(shift_id: ID! @eq): Shift @find(model: "App\\Models\\Shift\\Shift")
   activeShifts: [Shift!]! @all(model: "App\\Models\\Shift\\Shift", scoops: ["active"])
+  outletShift(outlet_id: ID! @eq): [Staff!]! @all(model: "App\\Models\\Shift\\Shift")
 }
 
 extend type Mutation {
@@ -50,3 +61,7 @@ extend type Mutation {
 
 }
 
+type ShiftPaginator {
+  data: [Shift!]!
+  paginatorInfo: paginatorInfo!
+}

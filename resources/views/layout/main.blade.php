@@ -258,18 +258,18 @@
                     </ul>
                 </li>
 
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('role'))
+                <li class="relative px-6 py-3">
+                    @if (request()->is('shift'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('role') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('shift') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/role">
+                        href="/shift">
                         <i class="fas fa-clock" role="img" aria-label="User"></i>
                         <span class="ml-4">Shift</span>
                     </a>
-                </li> --}}
+                </li>
 
                 <li class="relative px-6 py-3">
                     @if (request()->is('staff'))
@@ -297,31 +297,31 @@
                     </a>
                 </li> --}}
 
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('role'))
+                <li class="relative px-6 py-3">
+                    @if (request()->is('transaction-payment'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('role') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('transaction-payment') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/role">
+                        href="/transaction-payment">
                         <i class="fas fa-wallet" role="img" aria-label="User"></i>
                         <span class="ml-4">Transaction Payment</span>
                     </a>
-                </li> --}}
+                </li>
 
-                {{-- <li class="relative px-6 py-3">
-                    @if (request()->is('role'))
+                <li class="relative px-6 py-3">
+                    @if (request()->is('transaction-service'))
                         <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg" aria-hidden="true"></span>
                     @endif
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150  
-                            {{ request()->is('role') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
+                            {{ request()->is('transaction-service') ? 'text-purple-600 dark:text-purple-600' : 'text-gray-600 dark:text-gray-700' }} 
                             hover:text-purple-600 dark:hover:text-purple-600"
-                        href="/role">
+                        href="/transaction-service">
                         <i class="fas fa-clipboard-list" role="img" aria-label="User"></i>
                         <span class="ml-4">Transaction Service</span>
                     </a>
-                </li> --}}
+                </li>
 
                 <!-- Vehicle Type Menu -->
                 <li class="relative px-6 py-3">

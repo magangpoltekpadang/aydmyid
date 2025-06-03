@@ -5,70 +5,75 @@
 
 
     {{-- Plate Number --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-car" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="name" name="plate_number" value="{{ old('plate_number') }}"
-            placeholder="Plate Number"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="plate_number" class="block mb-1 font-semibold">Plate Number</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-car" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="name" name="plate_number" value="{{ old('plate_number') }}"
+                placeholder="Plate Number"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Name --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-user" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="name" class="block mb-1 font-semibold">Name</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-user" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Name"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Phone Number --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-phone" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
-            placeholder="Phone Number"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="phone_number" class="block mb-1 font-semibold">Phone Number</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-phone" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                placeholder="Phone Number"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
 
     {{-- Vehicle Type Id --}}
-    <div class="relative mb-4">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-truck-monster" aria-hidden="true"></i>
-        </span>
-        <select id="vehicle_type_id" name="vehicle_type_id"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
-            @foreach ($vehicle_types as $vehicle_type)
-                <option value="{{ $vehicle_type->vehicle_type_id }}"
-                    {{ old('vehicle_type_id') == $vehicle_type->vehicle_type_id ? 'selected' : '' }}>
-                    {{ $vehicle_type->vehicle_type_id }} {{ $vehicle_type->type_name ?? 'ID not found' }}
-                </option>
-            @endforeach
-        </select>
+    <div>
+        <label for="vehicle_type_id" class="block mb-1 font-semibold">Vehicle Type Id</label>
+        <div class="relative mb-4">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-truck-monster" aria-hidden="true"></i>
+            </span>
+            <select id="vehicle_type_id" name="vehicle_type_id"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300">
+                @foreach ($vehicle_types as $vehicle_type)
+                    <option value="{{ $vehicle_type->vehicle_type_id }}"
+                        {{ old('vehicle_type_id') == $vehicle_type->vehicle_type_id ? 'selected' : '' }}>
+                        {{ $vehicle_type->vehicle_type_id }} {{ $vehicle_type->type_name ?? 'ID not found' }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
+
 
     {{-- Vehicle Color --}}
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-palette" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="vehicle_color" name="vehicle_color" value="{{ old('vehicle_color') }}"
-            placeholder="Vehicle Color"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+    <div>
+        <label for="vehicle_color" class="block mb-1 font-semibold">Vehicle Color</label>
+        <div class="relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
+                <i class="fas fa-palette" aria-hidden="true"></i>
+            </span>
+            <input type="text" id="vehicle_color" name="vehicle_color" value="{{ old('vehicle_color') }}"
+                placeholder="Vehicle Color"
+                class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
+        </div>
     </div>
-
-    {{-- Member Number
-    <div class="relative">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">
-            <i class="fas fa-id-badge" aria-hidden="true"></i>
-        </span>
-        <input type="text" id="member_number" name="member_number" value="{{ old('member_number') }}"
-            placeholder="Member Number"
-            class="w-full h-11 px-3 pl-9 text-sm text-gray-800 text-black bg-white dark:bg-white-800 border border-white-300 dark:border-gray-700 rounded-md shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-300" />
-    </div> --}}
-
 
     {{-- Checkbox Aktif --}}
     <div x-data="{ isActive: {{ old('is_member') ? 'true' : 'false' }} }" class="mb-4">
